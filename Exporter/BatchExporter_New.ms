@@ -1,3 +1,6 @@
+/* Eve Exporter Script By Minomi*/
+
+
 Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms"
 Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms"
 Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" )
@@ -56,12 +59,12 @@ fn animationExportSetUp =
 	FbxExporterSetParam "Shape" false		
 	
 	
-	FbxExporterSetParam "SmoothingGroups" true	 	--Smoothing Group�� �����ؼ� Export�Ѵ�.
+	FbxExporterSetParam "SmoothingGroups" true	 	--Export With Smoothing Group
 	
-	FbxExporterSetParam "UpAxis" #z						 	--Up-Axis�� Z�� �����Ѵ�.
-	FbxExporterSetParam "Lights" false					 	--Light�� �������� �ʴ´�.
-	FbxExporterSetParam "ASCII" true						 	--Binary �ڵ��? Export�Ѵ�.
-	FbxExporterSetParam "ConvertUnit" #custom unit	--unit ������ Costom���� �����Ѵ�.
+	FbxExporterSetParam "UpAxis" #z						 	--Up Axis -> +Z
+	FbxExporterSetParam "Lights" false					 	--Export WithOut Light
+	FbxExporterSetParam "ASCII" true						 	--FBX Format -> ASCII
+	FbxExporterSetParam "ConvertUnit" #custom unit	--unit Size -> Custom
 	
 	
 	
