@@ -1,0 +1,1 @@
+getINISetting "personalSetting" "Species"

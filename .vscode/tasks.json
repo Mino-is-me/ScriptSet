@@ -1,0 +1,22 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Execute in Max",
+        "type": "process",
+        "command": "C:/Users/장민호/AppData/Local/autodesk/3dsmax/MXSPyCOM.exe",
+        "args": [
+          "-f",
+          "${file}"
+        ],
+        "presentation": {
+          "reveal": "always",
+          "panel": "new"
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": true
+        }
+      }
+    ]
+  }
