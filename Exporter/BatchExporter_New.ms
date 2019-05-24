@@ -379,15 +379,15 @@ fn ExtractFile = --code Wrap
 		format "\nExportFileName : %\n" exportFileName
 
 		exportFile exportFileName #noPrompt selectedOnly:True using:FBXEXPORTER
-		return exportFileName
+		fileName = getFilenameFile exportFileName 
+		return fileName
 	)
 	else
 	(
 		--exportName = ""
 		mesaageBox "first, save this Scene\nAnd Redo."	title:"script Alert"
 	)
-	fileName = getFilenameFile exportName 
-	return fileName
+	--fileName = getFilenameFile exportName 
 )
 
 Try(closeRolloutFloater theFloater) Catch()
