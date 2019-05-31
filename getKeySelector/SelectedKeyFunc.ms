@@ -1,22 +1,24 @@
-ar_keyFrames = #()
+global ar_keyFrames = #()
 
-selectedKeyOption = 0
+selectedKeyOption = 1
 
-fn getSelectedKeys =
+fn getSelectedKeys bSelectedBones = /* input1->BoneObject */
 (
-	for i=1 to $.controller.keys.count do
+	for i=1 to bSelectedBones.controller.keys.count do
 	(
-		if (isKeySelected $.controller i) == true do
+		if (isKeySelected bSelectedBones.controller i) == true do
 		(
-			temp = filterString (($.controller.keys[i]) as string) " "
+			temp = filterString ((bSelectedBones.controller.keys[i]) as string) " "
 			temp2 = substituteString temp[temp.count] ")" ""
 			temp = temp2 as integer
 			append ar_keyFrames temp
-		)
+        )
+        
 	)
-	sort ar_keyFrames
+    sort ar_keyFrames
+    
+    return ar_keyFrames 
 )
---biped.setSlidingKey $selection 
 
 
 fn setSelectedKeys =
@@ -26,7 +28,7 @@ fn setSelectedKeys =
 		for i = 1 to ar_keyFrames.count do
 		(	
 			sliderTime = ar_keyFrames[i] as time
-			print ar_keyFrames[i]
+			--print ar_keyFrames[i]
 			biped.setFreeKey $
 		)
 	)
@@ -35,7 +37,7 @@ fn setSelectedKeys =
 		for i = 1 to ar_keyFrames.count do
 		(	
 			sliderTime = ar_keyFrames[i] as time
-			print ar_keyFrames[i]
+			--print ar_keyFrames[i]
 			biped.setSlidingKey $
 		)
 	)
@@ -44,29 +46,31 @@ fn setSelectedKeys =
 		for i = 1 to ar_keyFrames.count do
 		(	
 			sliderTime = ar_keyFrames[i] as time
-			print ar_keyFrames[i]
+			--print ar_keyFrames[i]
 			biped.setPlantedKey $
 		)
 	)
 )
 
-Try(DestroyDialog setKeyForSelected) Catch()
+--Try(DestroyDialog setKeyForSelected) Catch()
 
 rollout setKeyForSelected "Set Key For Selected"
 (
+	
 	dropdownlist ddl_keyOption "Key Option" items:#("Free Key", "Sliding Key", "Planted Key")
 	Button btn_setKey "Set Keys to Seletion"
 	
 	on ddl_keyOption selected i do
 	(
-		print ddl_keyOption.items[i]
+		--print ddl_keyOption.items[i]
 		selectedKeyOption = i
 	)
 	
 	on btn_setKey pressed do
 	(
-		getSelectedKeys()
+		ar_keyFrames = #()
+		getSelectedKeys $
 		setSelectedKeys()
 	)
 	
-)CreateDialog setKeyForSelected
+)--CreateDialog setKeyForSelected

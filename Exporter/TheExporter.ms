@@ -1,5 +1,7 @@
 /* Eve Exporter Script By Minomi*/
 
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\SelectedKeyFunc.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\selectedKeyBipOpposite.ms"
 
 Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms"
 Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms"
@@ -56,8 +58,7 @@ fn animationExportSetUp =
 	FbxExporterSetParam "Resampling" 30.0
 	FbxExporterSetParam "FilterKeyReducer" false
 	FbxExporterSetParam "Skin" true	
-	FbxExporterSetParam "Shape" false		
-	
+	FbxExporterSetParam "Shape" false
 	
 	FbxExporterSetParam "SmoothingGroups" true	 	--Export With Smoothing Group
 	
@@ -562,4 +563,6 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 )
 theFloater = newRolloutFloater "The Exporter" 505 730
 
-addRollout 'Exporter' theFloater
+addRollout 'Exporter' theFloater rolledUp:false
+addRollout 'setKeyForSelected' theFloater rolledUp:true
+addRollout 'rBipCopytoSel' theFloater rolledUp:true 

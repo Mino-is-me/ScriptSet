@@ -1,0 +1,6 @@
+1. 스크립트 이름 Unwrap UVW Transform
+2. 설명 제거
+3. 현재까지 수정된 내역은 Transform 창이 꺼지지 않는 문제로 스크립트를 실행시키면 기존의 창이 닫히고 새로 생성하는 방향으로 수정했음
+   (수정한 스크립트 파일 첨부 sel_uvw.ms 파일도 수정해야 할 것 같음 uvw_trans.ms )
+4. 카테고리명 UVW_Transform
+5. 툴버튼명 UVW_Trans
