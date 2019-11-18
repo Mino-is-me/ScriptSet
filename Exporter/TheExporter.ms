@@ -1,4 +1,4 @@
-/* Eve Exporter Script By Minomi*/
+/* Eve Toolset Script By Minomi*/
 
 global projectDir = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\"
 
