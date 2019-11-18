@@ -8,12 +8,25 @@ for i in selection do
     if isPosScript == true do 
     (
         posScript = posc.script 
-        posVari = posc.NumVariables()
-        for i=5 to posVari do 
+        numPosVari = posc.NumVariables()
+        --arPosVaris=#()
+        for j=5 to numPosVari do 
         (
-            
+            local varName = posc.GetName j
+            local varVal = posc.GetVarValue varName 
+            isNode = isKindof varVal node
+            if isNode == true then 
+            (
+                varValName = substituteString varVal.name " " "_"
+                posScript = substituteString posScript varName varValName
+            )
+            else 
+            (
+                posScript = substituteString posScript varName (varVal as string)
+            )
         )
     )
+    /*
     if rotc == rotation_script do 
     (
 
@@ -22,5 +35,11 @@ for i in selection do
     (
 
     )
+    */
 )
 
+print posScript
+
+Test1 = filterString posScript " "
+
+Test1
