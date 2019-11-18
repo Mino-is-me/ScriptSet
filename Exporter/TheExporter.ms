@@ -4,20 +4,20 @@ global projectDir = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\"
 
 global backUpDir = "\\\\10.220.70.12\\eve\\ART_Backup\\TA_TestFolder\\CollectedBackUp\\"
 
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\SelectedKeyFunc.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\selectedKeyBipOpposite.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\BVHRetargeter\\BVHRetargeter.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RMAngler.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionExtracter.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\showMaker\\showMaker.ms"
-include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\keyReducer\\SelectedKeyReducer.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\SelectedKeyFunc.ms" --selectedKeyReducer Body Include 
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\selectedKeyBipOpposite.ms" -- Biped Key Mirror Include
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\BVHRetargeter\\BVHRetargeter.ms" -- BVH Retargeter Include 
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RMAngler.ms" -- Root Motion Rotater Include
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionExtracter.ms" -- Root Motion Extracter Include 
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\showMaker\\showMaker.ms" -- Caster / Target Slacer for <SHOW> Include "NO USE NOW"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\keyReducer\\SelectedKeyReducer.ms" -- TAZO (Baked Key Cleaner) Include
 --include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\SOMI\\somi.ms"
 --include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
-Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms"
-Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms"
-Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" )
-Global eveLogo = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Logo\\eveLogo.bmp"
-Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" )
+Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms" --get EVE Body Nodes "USE ONLY Body 1~4"
+Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms" -- "NO USE" now we use BlendShape Only
+Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" ) -- get UserOwn Last Export Path
+Global eveLogo = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Logo\\eveLogo.bmp" -- get EVELOGO image
+Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" ) -- get UserOWN Exporter setting ini
 
 fn grabchildren aBone childArray:#() getSelf:true = 
 (
