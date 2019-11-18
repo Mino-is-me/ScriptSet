@@ -10,9 +10,8 @@
 	*/
 --	getThisScriptFilename()
 	--Ver : Beta
-	
-(
-	
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
+(	
 	Global Flt_support
 	Global Flt_observe
 	Global Flt_interface
@@ -94,8 +93,9 @@
 
 	Rollout rlt_Orga "Organize"
 	(
-		Button btn_world "world" across:2
+		Button btn_world "world" across:3
 		Button btn_Local "Local"
+		Button btn_Parent "Parent"
 
 		on btn_world pressed do
 		(
@@ -104,6 +104,10 @@
 		on btn_local pressed do
 		(
 			toolMode.coordsys #local
+		)
+		on btn_Parent pressed do 
+		(
+			toolMode.coordsys #parent	
 		)
 	)
 		Rollout rlt_Info "Information"
@@ -169,7 +173,7 @@
 	cui.RegisterDialogBar Flt_support
 	cui.DockDialogBar Flt_support #cui_dock_Bottom
 	
-	Flt_observe = newRolloutFloater "Organize" 150 50
+	Flt_observe = newRolloutFloater "Organize" 200 50
 	addRollout rlt_Orga Flt_observe	
 	cui.RegisterDialogBar Flt_observe
 	cui.DockDialogBar Flt_observe #cui_dock_Bottom

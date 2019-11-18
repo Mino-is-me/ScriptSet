@@ -1,8 +1,18 @@
 /* Eve Exporter Script By Minomi*/
 
+global projectDir = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\"
+
+global backUpDir = "\\\\10.220.70.12\\eve\\ART_Backup\\TA_TestFolder\\CollectedBackUp\\"
+
 include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\SelectedKeyFunc.ms"
 include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\getKeySelector\\selectedKeyBipOpposite.ms"
-
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\BVHRetargeter\\BVHRetargeter.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RMAngler.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionExtracter.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\showMaker\\showMaker.ms"
+include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\keyReducer\\SelectedKeyReducer.ms"
+--include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\SOMI\\somi.ms"
+--include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
 Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms"
 Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms"
 Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" )
@@ -44,7 +54,7 @@ fn collectUserLog logDir fileName =
 )
 
 
-fn animationExportSetUp =
+fn animationExportSetUp frameVal =
 (
 	FbxExporterSetParam "Animation" true
 	
@@ -55,7 +65,7 @@ fn animationExportSetUp =
 	FbxExporterSetParam "BakeFrameEnd" animationRange.end
 	FbxExporterSetParam "BakeFrameStep" 1
 	FbxExporterSetParam "BakeResampleAnimation" true
-	FbxExporterSetParam "Resampling" 30.0
+	FbxExporterSetParam "Resampling" frameVal
 	FbxExporterSetParam "FilterKeyReducer" false
 	FbxExporterSetParam "Skin" true	
 	FbxExporterSetParam "Shape" false
@@ -239,16 +249,28 @@ fn getSkinBone obj =
 
 fn isRootNodeisRoot =
 (
-	if( $Bip001.parent == $Root ) then
+	local bRootisValid = isValidNode $Root 
+
+	if bRootisValid == true then 
 	(
-		isRoot = True
+		if( $Bip001.parent == $Root ) then
+		(
+			isRoot = True
+		)
+		else 
+		(
+			isRoot = false
+			$Bip001.parent = $Root 
+		)
 	)
 	else 
 	(
-		isRoot = false
-		$Bip001.parent = $Root 
+		local bnRootNode = boneSys.createBone [ 0, 0, 0 ] [ 0, -20, 0 ] [ 0, 0, 1 ] -- Root를 -Y를 Front로 놓고 생성 
+		bnRootNode.name = "Root"
+		$Bip001.parent = bnRootNode 
+		print "Root Node Created"
 	)
-	
+
 	Return isRoot 
 )
 
@@ -276,6 +298,7 @@ Global specificName = ""
 
 fn selectSkinBones = --wrappingCode 
 (
+	ar_skinBones = #()
 	ar_skinObjs = getSkinObjs()
 	for i=1 to ar_SkinObjs.count do
 	(
@@ -381,7 +404,9 @@ fn ExtractFile = --code Wrap
 		)
 
 		format "\nExportFileName : %\n" exportFileName
-
+		/*BackUp File*/
+		saveMaxFile (backUpDir + MaxFileName) quiet:true useNewFile:false
+		/*BackUp File*/ 
 		exportFile exportFileName #noPrompt selectedOnly:True using:FBXEXPORTER
 		fileName = getFilenameFile exportFileName 
 		return fileName
@@ -510,7 +535,8 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 		else FacialSetting = ddl_FacialSetting.selection
 
 		format "\n%,%,%\n" Species exportOption facialSetting
-		animationExportSetUp()
+		animationExportSetUp (frameRate as float)
+
 
 
 		if ar_MaxFiles.count != 0 then --do Multi Export 
@@ -523,16 +549,17 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 				loadMaxFile i quiet:true
 				units.systemScale = 1
 
+				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked --Extract RootMotion 
 				--hideByCategory.none()
 				--unhide $*
 
 				selectBeforeExport()
 
-				animationExportSetUp()
+				animationExportSetUp (frameRate as float)
 
 				fileName = ExtractFile()
-				logDir = makeExportogDir()
-				collectUserLog logDir fileName  
+				--logDir = makeExportogDir()
+				--collectUserLog logDir fileName  
 				cnt += 1
 				pgb_process.value = (100.0 / ar_MaxFiles.count ) * cnt
 			)
@@ -547,11 +574,14 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 
 			units.SystemScale = 1
 
+			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked --Extract RootMotion 
+
+			
 			selectBeforeExport()
 			
 			fileName = ExtractFile()
-			logDir = makeExportogDir()
-			collectUserLog logDir fileName  
+			--logDir = makeExportogDir()
+			--collectUserLog logDir fileName  
 			pgb_process.value = 100
 			if pgb_process.value == 100 do 
 			(
@@ -561,8 +591,33 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 		)
 	)
 )
-theFloater = newRolloutFloater "The Exporter" 505 730
+
+rollout awesomeTools "Awesome Tools!(BETA)"
+(
+	button btn_ctrlGlue "Controller Glue" across:3
+	button btn_somi "SOMI"
+	on btn_ctrlGlue pressed do 
+	(
+		filein (projectDir + "ControllerGlue\\ControllerGlue.ms")
+		filein (projectDir + "ControllerGlue\\RolloutHandler.ms")
+	)
+
+	on btn_somi pressed do 
+	(
+		filein (projectDir + "SOMI\\somi.ms")
+	)
+)
+
+theFloater = newRolloutFloater "EVE Tool" 505 850
 
 addRollout 'Exporter' theFloater rolledUp:false
+addRollout 'RootMotionMaker' theFloater rolledUp:false
+addrollout 'rltKeyReducer' theFloater rolledUp:true
 addRollout 'setKeyForSelected' theFloater rolledUp:true
 addRollout 'rBipCopytoSel' theFloater rolledUp:true 
+addRollout 'BVHRetargeter' theFloater rolledUp:true 
+addRollout 'LocoMocapRotator' theFloater rolledUp:true 
+addrollout 'awesomeTools' theFloater rolledUp:false
+
+--createDialog rltKeyReducer 400 80
+--addRollout 'showMaker' theFloater rolledUp:true 

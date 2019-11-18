@@ -1,6 +1,6 @@
 CameraBone = Bone()
 CameraBone.parent = $Root
-CAM = $Link_Camera
+CAM = $
 
 CAM.name = "Link_Camera_CAM"
 

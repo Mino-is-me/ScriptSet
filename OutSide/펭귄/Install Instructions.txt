@@ -1,0 +1,31 @@
+kenzors 3ds MAX Scripts
+
+ken@designimage.co.uk
+
+--------------------------- Automatic Installation ---------------------------
+
+With Max open drag and drop the file KenzorsScriptPack.mzp onto a max viewport
+
+--------------------------- Manual Installation ---------------------------
+If the automatic installation fails for some reason then you can simply copy yhe files to the correct location manually
+
+1. remame KenzorsScriptPack.mzp to KenzorsScriptPack.zip
+
+2. Unzip the files keeping the folder structure.
+
+3. Copy the KenzorsScripts folder and its contents to your 3dsMax 'user scripts' directory.
+
+You can check you 'user scripts' directory in max by going to the menubar..
+.. Customise > Configure System Paths > select the 'System' tab > and checking the 'Additional Scripts' path  )
+
+4. Copy the userMacros folder and its contents to your 'userMacros' directory.
+
+You can check you 'user scripts' directory in max by going to the menubar..
+.. Customise > Configure System Paths > select the 'System' tab > and checking the 'Additional Macros' path  )
+
+5. Copy the userIcons folder and its contents to your 'userIcons' directory.
+
+You can check you 'user scripts' directory in max by going to the menubar..
+.. Customise > Configure System Paths > select the 'System' tab > and checking the 'Additional Icons' path  )
+
+The MaxScripts are run using my 'Script Navigator' utility or by simply navigating to the .ms file in 3dsmax

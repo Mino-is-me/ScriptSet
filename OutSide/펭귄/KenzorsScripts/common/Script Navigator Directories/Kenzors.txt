@@ -1,0 +1,13 @@
+Kenzors Script Navigator list v,1.2
+#Allow_User_Edit ,true
+3dsMax ini Inspector,$userScripts\KenzorsScripts\GeneralScripts\3dsMaxIniInspector.ms,
+BakeAnim,$userScripts\KenzorsScripts\GeneralScripts\BakeAnim.ms,
+Biped Crude Key Reducer,$userScripts\KenzorsScripts\Biped Tools\KenzorsCrudeKeyReducer.ms,
+Biped Key All,$userscripts\KenzorsScripts\Biped Tools\Biped Key All.ms,Key all the limbs of the selected biped in one click.
+Camera Resolution tool,$userScripts\KenzorsScripts\CameraTrack\tweakCamera.ms,Quickly set proxys and overscan for real cameras
+Camera Track Export,$userScripts\KenzorsScripts\CameraTrack\Camera Track Export.ms,
+Control Shape rollout,$userscripts\KenzorsScripts\common\control Shape rollout.ms,Load and Save shapes for animation controls.
+Kenzors Mirror Ball,$userScripts\KenzorsScripts\GeneralScripts\KenzorsMirrorBall.ms,Procedural Mirror Ball Creator
+Previs,$userScripts\KenzorsScripts\previs\Previs.ms,
+Stretchy Bone,$userScripts\KenzorsScripts\Rigging\StretchBone.ms,
+Turbosmooth Helper,$userscripts\KenzorsScripts\GeneralScripts\Turbosmooth Helper.ms,Toggle all turbosmooth modifiers on and off

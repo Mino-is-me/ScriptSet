@@ -56,21 +56,47 @@ fn setSelectedKeys =
 
 rollout setKeyForSelected "Set Key For Selected"
 (
+	Button btn_free "Free Key" across:3
+	Button btn_Sliding "Sliding Key"
+	Button btn_Planted "Planted Key"
 	
-	dropdownlist ddl_keyOption "Key Option" items:#("Free Key", "Sliding Key", "Planted Key")
-	Button btn_setKey "Set Keys to Seletion"
-	
-	on ddl_keyOption selected i do
+
+	on btn_free pressed do 
 	(
-		--print ddl_keyOption.items[i]
-		selectedKeyOption = i
-	)
-	
-	on btn_setKey pressed do
-	(
+		Nodes = selection as array
 		ar_keyFrames = #()
-		getSelectedKeys $
-		setSelectedKeys()
+		for i in Nodes do 
+		(
+			select i
+			getSelectedKeys $
+			selectedKeyOption = 1
+			setSelectedKeys()
+		)
+
+	)
+	on btn_sliding pressed do 
+	(
+		Nodes = selection as array
+		ar_keyFrames = #()
+		for i in Nodes do 
+		(
+			select i 
+			getSelectedKeys $
+			selectedKeyOption = 2
+			setSelectedKeys()
+		)
+	)
+	on btn_Planted pressed do 
+	(
+		Nodes = selection as array
+		ar_keyFrames = #()
+		for i in Nodes do 
+		(
+			select i 
+			getSelectedKeys $
+			selectedKeyOption = 3
+			setSelectedKeys()
+		)
 	)
 	
 )--CreateDialog setKeyForSelected

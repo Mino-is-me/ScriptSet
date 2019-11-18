@@ -3,7 +3,7 @@ BVHFiles = #()
 --BonesToRetarget = #($'Bip001 L Finger0',$'Bip001 R Clavicle',$'Bip001 L Clavicle')
 BipSavePath = ""
 cnt = 0 
-fn fn_getMultipleFiles =
+fn BVHfn_getMultipleFiles =
 (
 	theDialog = dotNetObject "System.Windows.Forms.OpenFileDialog" --create a OpenFileDialog 
 	theDialog.title = "PLEASE Select One Or More Files" --set the title
@@ -25,13 +25,18 @@ fn fn_retargetBone = --Write Down Custom Retarget Setting
 	SliderTime = 1f
 	set Animate On 
 -- Bip Finger Retarget -- 
-	in coordsys local rotate $'Bip001 L Finger0' (eulerAngles 90 0 0)
-	in coordsys local rotate $'Bip001 L Finger0' (eulerAngles 0 0 25)	
-	
-	in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 90 0 0)
-	in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 0 -25)	
-	in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 -20 0)	
-	in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 0 5)	
+	if (isValidNode $'Bip001 L Finger0') == True do 
+	(
+		in coordsys local rotate $'Bip001 L Finger0' (eulerAngles 90 0 0)
+		in coordsys local rotate $'Bip001 L Finger0' (eulerAngles 0 0 25)	
+	)	
+	if (isValidNode $'Bip001 R Finger0') == true do 
+	(
+		in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 90 0 0)
+		in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 0 -25)	
+		in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 -20 0)	
+		in coordsys local rotate $'Bip001 R Finger0' (eulerAngles 0 0 5)	
+	)
 
 	-- Bip Clavicle Retarget --
 	in coordsys local rotate $'Bip001 R Clavicle' (eulerAngles 0  7.5 0)
@@ -74,7 +79,7 @@ rollout BVHRetargeter "BVH Retargeter"
 	
 	on btn_getBVHFiles pressed do
 	(
-		BVHFiles = fn_getMultipleFiles()
+		BVHFiles = BVHfn_getMultipleFiles()
 		Try(mlb_FileNames.items = BVHFiles) Catch()
 		
 	)
@@ -87,16 +92,37 @@ rollout BVHRetargeter "BVH Retargeter"
 	
 	on btn_Retarget pressed do
 	(
-		for i=1 to BVHFiles.count do
+		resetMaxFile #noprompt
+		biped.createNew 100 -90 [0,0,100] arms:true neckLinks:1 spineLinks:3
+
+		biped.loadMocapFile $Bip001.controller BVHFiles[1] #prompt 
+		if BipSavePath != "" then 
 		(
-			resetMaxFile #noprompt
+			savePath = fn_makeBipFileName BipSavePath BVHFiles[1]
+		)
+		else 
+		(
+			savePath = (getFilenamePath BVHFiles[1]) + (getFileNameFile BVHFiles[1]) + ".bip"
+		)
+		biped.saveBipFile $Bip001.controller savePath
+		print savePath 
+		for i=2 to BVHFiles.count do
+		(
+			--resetMaxFile #noprompt
 			
-			biped.createNew 100 -90 [0,0,100] arms:true neckLinks:1 spineLinks:3
-			biped.loadMocapFile $Bip001.controller BVHFiles[i]
+			--biped.createNew 100 -90 [0,0,100] arms:true neckLinks:1 spineLinks:3
+			biped.loadMocapFile $Bip001.controller BVHFiles[i] --#prompt 
 			biped.createLayer $Bip001.controller 1 "Layer_Retarget"
 			fn_retargetBone()
 			biped.collapseAtLayer $Bip001.Controller 0
-			savePath = fn_makeBipFileName BipSavePath BVHFiles[i]
+			if BipSavePath != "" then 
+			(
+				savePath = fn_makeBipFileName BipSavePath BVHFiles[i]
+			)
+			else 
+			(
+				savePath = (getFilenamePath BVHFiles[i]) + (getFileNameFile BVHFiles[i]) + ".bip"
+			)
 			biped.saveBipFile $Bip001.controller savePath
 			print savePath 
 			cnt += 1
@@ -108,4 +134,5 @@ rollout BVHRetargeter "BVH Retargeter"
 		)
 	)
 )
-createDialog BVHRetargeter 400 400
+--createDialog BVHRetargeter 400 400
+

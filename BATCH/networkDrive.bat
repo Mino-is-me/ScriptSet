@@ -1,0 +1,1 @@
+net use X:\\10.220.70.12\eve pw#1234! user:eve_team persistent:yes 
