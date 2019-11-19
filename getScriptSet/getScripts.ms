@@ -1,3 +1,4 @@
+ this = getFilenamePath (getThisScriptFilename() )
 for i in selection do 
 (
     posc = i.pos.controller 
@@ -40,6 +41,6 @@ for i in selection do
 
 print posScript
 
-Test1 = filterString posScript " "
+--Test1 = filterString posScript " "
 
 Test1
