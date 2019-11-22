@@ -6,7 +6,7 @@ fn getThisDir =
 		return thisPath
 	)
 
-	Global this = getThisDir()
+	Global this = getThisDir() + "\\image\\"
 
 	obj  = (selection as array)[1]
 
@@ -46,7 +46,7 @@ fn getThisDir =
 			button 'btn37' "Button" pos:[16,272] width:72 height:72 align:#left images:#(This+"Scale03_4.png", undefined, 1,1,1,1,1)
 			button 'btn38' "Button" pos:[88,272] width:72 height:72 align:#left images:#(This+"Scale03_2.png", undefined, 1,1,1,1,1)
 			groupBox 'grp4' "" pos:[176,184] width:168 height:168 align:#left
-			button 'btn39' "Button" pos:[224,200] width:72 height:40 align:#left images:#(This+"move_2.png", undefined, 1,1,1,1,1) --toolTip:"¼±ÅÃµÈ UVW¸¦ 0.25 ¸¸Å­ »ó´ÜÀ¸·Î ÀÌµ¿ ÇÕ´Ï´Ù."
+			button 'btn39' "Button" pos:[224,200] width:72 height:40 align:#left images:#(This+"move_2.png", undefined, 1,1,1,1,1) --toolTip:"ï¿½ï¿½ï¿½Ãµï¿½ UVWï¿½ï¿½ 0.25 ï¿½ï¿½Å­ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½Õ´Ï´ï¿½."
 			button 'btn43' "Button" pos:[184,235] width:40 height:72 align:#left images:#(This+"move_4.png", undefined, 1,1,1,1,1)
 			button 'btn44' "Button" pos:[224,304] width:72 height:40 align:#left images:#(This+"move_1.png", undefined, 1,1,1,1,1)
 			button 'btn45' "Button" pos:[296,235] width:40 height:72 align:#left images:#(This+"move_3.png", undefined, 1,1,1,1,1)
@@ -95,19 +95,19 @@ fn getThisDir =
 			/*DownScale Horizontal Group*/
 			on btn35 pressed  do
 			(
-			$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 1.0 [1.0,1.0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 1.0 [1.0,1.0,0]
 			)
 			on btn36 pressed  do
 			(
-			$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 1 0.5 [0.0,1.0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 1 0.5 [0.0,1.0,0]
 			)
 			on btn37 pressed  do
 			(
-			$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 1.0 [0.0,0.0,0.0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 1.0 [0.0,0.0,0.0]
 			)
 			on btn38 pressed  do
 			(
-			$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 1 0.5 [0.0,0.0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 1 0.5 [0.0,0.0,0]
 			)
 			/*DownScale Horizontal Group*/
 			
