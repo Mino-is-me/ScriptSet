@@ -292,31 +292,32 @@ else AX = degtorad ( -A_Rot.y )
 	RScapula.transform = (matrix3 [0.493735,-0.0713102,-0.866684] [0.0289719,0.997427,-0.0655627] [0.86913,0.00726153,0.494531] [-120.689,-0.617413,73.0101]) * RScapula.parent.transform 
 	
 	RScapula.pos.controller = Position_Script()
-	RScapula.pos.controller.addConstant "OBJ_A" $'Bip001 R UpperArm'
+	RScapula.pos.controller.addConstant "OBJ_A" $'Bm R UpperArm'
 	RScapula.pos.controller.script = "A_Rot = ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).rotation ) as eulerAngles
 
-AZ = degtorad -A_Rot.z
-
-if AZ > 0 then TY = AZ/2
-else TY = -AZ/2
-
-[ AZ, TY, 0 ]"
+	AZ = degtorad -A_Rot.z
+	
+	if AZ > 0 then TY = AZ
+	else TY = -AZ
+	
+	[ AZ*2, TY, 0 ]"
 
 	RScapula.rotation.controller = rotation_script()
 	RScapula.rotation.controller.addConstant "OBJ_A" $'Bip001 R UpperArm'
+	RScapula.rotation.controller.addConstant "OBJ_B" $'Dm R UpperArm'
 	RScapula.rotation.controller.script = "A_Rot = ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).rotation ) as eulerAngles
-
-AX = -A_Rot.x
-AY = A_Rot.y
-AZ = A_Rot.z
-
-TY = -(30-(AY/2))
- 
-if AZ > 0 then TZ = AZ/5
-else TZ = AZ/10
-
-
-( EulerAngles (0) (TY) (TZ) )"
+	B_Rot = ( (OBJ_B.transform * (inverse OBJ_B.parent.transform) ).rotation ) as eulerAngles
+	
+	AY = A_Rot.y
+	BZ = B_Rot.z
+	
+	TY = -(30-(AY/2))
+	 
+	if BZ > 0 then TZ = BZ/2.5
+	else TZ = BZ/5
+	
+	
+	( EulerAngles (0) (TY) (TZ) )"
 
 )
 
