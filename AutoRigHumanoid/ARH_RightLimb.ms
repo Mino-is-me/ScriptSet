@@ -292,7 +292,7 @@ else AX = degtorad ( -A_Rot.y )
 	RScapula.transform = (matrix3 [0.493735,-0.0713102,-0.866684] [0.0289719,0.997427,-0.0655627] [0.86913,0.00726153,0.494531] [-120.689,-0.617413,73.0101]) * RScapula.parent.transform 
 	
 	RScapula.pos.controller = Position_Script()
-	RScapula.pos.controller.addConstant "OBJ_A" $'Bm R UpperArm'
+	RScapula.pos.controller.addConstant "OBJ_A" $'Dm R UpperArm'
 	RScapula.pos.controller.script = "A_Rot = ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).rotation ) as eulerAngles
 
 	AZ = degtorad -A_Rot.z
