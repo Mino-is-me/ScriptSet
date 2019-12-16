@@ -549,7 +549,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 				loadMaxFile i quiet:true
 				units.systemScale = 1
 
-				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked --Extract RootMotion 
+				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 				--hideByCategory.none()
 				--unhide $*
 
@@ -574,7 +574,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 
 			units.SystemScale = 1
 
-			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked --Extract RootMotion 
+			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 
 			
 			selectBeforeExport()
@@ -608,7 +608,7 @@ rollout awesomeTools "Awesome Tools!(BETA)"
 	)
 )
 
-theFloater = newRolloutFloater "EVE Tool" 505 850
+theFloater = newRolloutFloater "EVE Tool" 505 960
 
 addRollout 'Exporter' theFloater rolledUp:false
 addRollout 'RootMotionMaker' theFloater rolledUp:false
