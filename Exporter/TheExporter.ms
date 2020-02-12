@@ -265,9 +265,14 @@ fn isRootNodeisRoot =
 	)
 	else 
 	(
-		local bnRootNode = boneSys.createBone [ 0, 0, 0 ] [ 0, -20, 0 ] [ 0, 0, 1 ] -- Root를 -Y를 Front로 놓고 생성 
+		local bnRootNode = boneSys.createBone [ 0, 0, 0 ] [ 20, 0, 0 ] [ 0, 0, 1 ] -- Root를 +X를 Front로 놓고 생성 
 		bnRootNode.name = "Root"
 		$Bip001.parent = bnRootNode 
+		bnRootNode.sidefins = true 
+		bnRootNode.backfin = false 
+		bnRootNode.frontfin = false 
+		bnRootNode.sidefinssize = 4.0
+
 		print "Root Node Created"
 	)
 
@@ -322,6 +327,7 @@ fn selectBeforeExport =
 				(
 					ar_skinObjs = getSkinObjs()
 					selectMore ar_skinObjs
+					selectMore $SC_WeaponConstraint
 					format "select Bones and Mesh PC[EVE]\n"
 				)
 				2 : -- when Export Bones Only 
@@ -347,6 +353,12 @@ fn selectBeforeExport =
 				(
 					selectSkinBones()
 					selectMore ar_skinObjs 
+					Try
+					(
+						SelectMore $Bip001 
+						SelectMore $Root 
+					)
+					Catch()
 				)
 				2 : --when Export Bones Only 
 				(
@@ -537,7 +549,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 		format "\n%,%,%\n" Species exportOption facialSetting
 		animationExportSetUp (frameRate as float)
 
-
+		
 
 		if ar_MaxFiles.count != 0 then --do Multi Export 
 		(
@@ -552,7 +564,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 				--hideByCategory.none()
 				--unhide $*
-
+				isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
 				selectBeforeExport()
 
 				animationExportSetUp (frameRate as float)
@@ -576,7 +588,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 
 			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 
-			
+			isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
 			selectBeforeExport()
 			
 			fileName = ExtractFile()
