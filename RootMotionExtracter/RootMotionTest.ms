@@ -10,6 +10,11 @@ cnt = 0
 dm_reflectCOM = Dummy() 
 dm_RotationCOM = Dummy() 
 
+AnimStart = AnimationRange.start as integer / 160 
+AnimEnd = AnimationRange.end as integer / 160
+
+
+FrameCount = AnimEnd-AnimStart + 1
 
 fn objToVector object =
 (
@@ -32,8 +37,13 @@ dm_reflectCOM.pos.controller.appendTarget $Bip001 50.0
 dm_reflectCOM.pos.controller.appendTarget $Bip001_Head 50.0 
 dm_reflectCOM.pos.controller.relative = on 
 */
-dm_reflectCOM.parent = $Bip001 
+--dm_reflectCOM.parent = $Bip001 
+sliderTime = AnimationRange.start 
+
 -------------------Position Controller-----------------------
+dm_reflectCOM.position.controller = Position_Constraint()
+dm_reflectCOM.position.controller.appendTarget $Bip001 50.0 
+dm_reflectCOM.position.controller.relative = on 
 -------------------Rotation Controller-----------------------
 dm_RotationCOM.rotation.controller = Orientation_Constraint() 
 dm_RotationCOM.rotation.controller.appendTarget $Bip001 50.0 
@@ -66,7 +76,7 @@ for i=AnimationRange.start to AnimationRange.end do
     append ar_reflectedRot dm_RotationCOM.rotation 
 ) 
 
-sliderTime = 0f 
+sliderTime = AnimationRange.start
 
 for i=1 to ar_COMPos.count do 
 (
@@ -76,13 +86,18 @@ for i=1 to ar_COMPos.count do
 $Bip001.parent = World 
 
 Set Animate On 
-
+cnt1= 0
 for i=AnimationRange.start to AnimationRange.end do 
 (
     SliderTime = i 
+	cnt1 = cnt1+1
+	--print sliderTime 
 	frCNT = ( (i as integer) / 160) + 1 
-    $Root.pos = ar_COMPos[frCNT]
+	--print frCNT 
+    $Root.pos = ar_COMPos[cnt1]
+	--print ar_COMPos[cnt1]
     $Root.pos.z = 0
+	--print $Root.pos
     --$Root.rotation = ar_reflectedRot[frCNT]
 	--$Root.rotation = ar_COMRot[frCNT]
 )
@@ -101,13 +116,18 @@ set Animate on
 
 biped.createLayer $Bip001.controller 1 "RMotionLayer01"
 
+sliderTime = AnimationRange.End
+sliderTime = AnimationRange.Start
+--Biped Layer Bug 안전처리 
+cnt2 = 0
 for i=AnimationRange.start to AnimationRange.end do 
 (
 	sliderTime = i
+	cnt2=cnt2+1
 	frCNT = ( (i as integer) / 160) + 1 
 	
-	biped.setTransform $Bip001 #pos ar_originPos[frCNT] true 
-	biped.setTransform $Bip001 #Rotation ar_COMRot[frCNT] true 
+	biped.setTransform $Bip001 #pos ar_originPos[cnt2] true 
+	biped.setTransform $Bip001 #Rotation ar_COMRot[cnt2] true 
 )
 Set Animate Off 
 

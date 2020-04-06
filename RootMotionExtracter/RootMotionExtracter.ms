@@ -2,7 +2,7 @@ global isXAxisChecked = false
 global isYAxisChecked = false 
 global isYawChecked = false 
 global isKeepingDistance = false 
-global euRotateAngle = 0 
+global euRotateAngle = (eulerAngles 0 0 0)
 fn makeRootMotion bwithX bwithY bwithYaw isKeepingDistance rotateAngle = -- bool bool bool 
 (
 	if isKeepingDistance == false then 
@@ -77,7 +77,7 @@ fn makeRootMotion bwithX bwithY bwithYaw isKeepingDistance rotateAngle = -- bool
 					)
 				)
 			)
-			SliderTime = 0f 
+			SliderTime = AnimationRange.Start
 			
 			$Root.transform = $Root_Sub.transform 
 			DeleteKeys $Root.position.controller.Z_Position.controller #allKeys
@@ -129,7 +129,7 @@ fn makeRootMotion bwithX bwithY bwithYaw isKeepingDistance rotateAngle = -- bool
 			Catch() 
 		)
 
-		sliderTime = 0f
+		sliderTime = AnimationRange.Start
 
 		delete Exposer 
 		delete propExposer 
@@ -258,3 +258,4 @@ Rollout RootMotionMaker "Extract Root Motion"
 	)
 
 )--createDialog RootMotionMaker 505 200
+

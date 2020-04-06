@@ -3,7 +3,7 @@ import unreal
 __blendspace_dir__ = "/Game/Art/Character/Monster/CH_M_NA_03/Animation/BlendSpace"
 #Find && Make BS Assets 
 
-__bs_lists__ = ['Airborne_BS','Dead_BS','Down_BS','GetUp_BS','Groggy_BS','IdleRun_BS_Peaceful','Link_Dead_BS','LockOn_BS']
+__bs_lists__ = ['Airborne_BS','Dead_BS','Down_BS','GetUp_BS','Groggy_BS','IdleRun_BS_Peaceful','LockOn_BS','IdleRun_BS_Battle']
 
 
 for i in __bs_lists__:
@@ -25,3 +25,5 @@ for i in __bs_lists__:
         
         __loaded_renamed_asset__ = unreal.EditorAssetLibrary.load_asset(__renamed_asset_path__)
         #Load BlendSpace Object and Set Animsequence by founded Name 
+
+

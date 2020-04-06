@@ -19,6 +19,8 @@ Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" ) -
 Global eveLogo = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Logo\\eveLogo.bmp" -- get EVELOGO image
 Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" ) -- get UserOWN Exporter setting ini
 
+
+Global exportWithMorph = false 
 fn grabchildren aBone childArray:#() getSelf:true = 
 (
 	for cBone in aBone.children do
@@ -54,7 +56,7 @@ fn collectUserLog logDir fileName =
 )
 
 
-fn animationExportSetUp frameVal =
+fn animationExportSetUp frameVal isWithMorph =
 (
 	FbxExporterSetParam "Animation" true
 	
@@ -68,7 +70,7 @@ fn animationExportSetUp frameVal =
 	FbxExporterSetParam "Resampling" frameVal
 	FbxExporterSetParam "FilterKeyReducer" false
 	FbxExporterSetParam "Skin" true	
-	FbxExporterSetParam "Shape" false
+	FbxExporterSetParam "Shape" isWithMorph
 	
 	FbxExporterSetParam "SmoothingGroups" true	 	--Export With Smoothing Group
 	
@@ -448,7 +450,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 	edittext 'et_processText' "" pos:[17,650] width:447
 	edittext 'et_exportName' "Export Name : " pos:[20,565] width:250
 	checkBox 'chx_isMultiExport' "Multi Export?" pos:[280,565] tooltip:"if unchecked, Export Scene objects"
-	dropDownList 'ddl_FacialSetting' "Facial" pos:[366,543] width:101 height:41 items:#("WithOut Facial", "Facial Only") align:#left
+	checkBox 'chk_withMorph' "Morph?" pos:[366,543] width:101 height:41 checked:false 
 	groupBox 'grp2' "" pos:[12,126] width:468 height:314 align:#left
 	groupBox 'grp3' "" pos:[13,453] width:468 height:138 align:#left
 	groupBox 'grp4' "Progress" pos:[13,603] width:468 height:90 align:#left
@@ -457,7 +459,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 	On Exporter open do
 	(
 		et_FilePath.text = ( BatchDir as string )
-		ddl_FacialSetting.enabled = false
+		--ddl_FacialSetting.enabled = false
 		et_processText.text = "Preparing for the export..."
 		--makeExportogDir()
 		--Species = getINISetting rolloutSetting "personalSetting" "Species"
@@ -478,12 +480,12 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 	(
 		if i != 1 then
 		(
-			ddl_FacialSetting.enabled = false
+			--ddl_FacialSetting.enabled = false
 			facialSetting = 0
 		)
 		else BatchDir
 		(
-			ddl_FacialSetting.enabled = true
+			--ddl_FacialSetting.enabled = true
 			facialSetting = 1
 		)
 		Species = i
@@ -495,25 +497,25 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 		if i == 3 or i == 4 then
 		(
 			ddl_Species.enabled = false
-			ddl_FacialSetting.enabled = false
+			--ddl_FacialSetting.enabled = false
 		)
 		else if i == 1 then 
 		(
 			ddl_Species.enabled = true
-			ddl_FacialSetting.enabled = false
+			--ddl_FacialSetting.enabled = false
 		)
 		else
 		(
 			ddl_Species.enabled = true
-			ddl_FacialSetting.enabled = true
+			--ddl_FacialSetting.enabled = true
 		)
 		exportOption = i
 		setINISetting rolloutSetting "personalSetting" "ExportOption" ( exportOption as string )
 	)
 	
-	On ddl_facialSetting selected i do
+	On chk_withMorph changed state do
 	(
-		facialSetting = i
+		exportWithMorph = state
 	)
 	
 	On et_exportName changed txt do
@@ -543,11 +545,11 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 		
 		if ( ddl_Species.enabled != true ) then Species = 0
 		else Species = ddl_Species.selection
-		if ( ddl_FacialSetting.enabled != True ) then FacialSetting = 0
-		else FacialSetting = ddl_FacialSetting.selection
+		--if ( ddl_FacialSetting.enabled != True ) then FacialSetting = 0
+		--else FacialSetting = ddl_FacialSetting.selection
 
 		format "\n%,%,%\n" Species exportOption facialSetting
-		animationExportSetUp (frameRate as float)
+		animationExportSetUp (frameRate as float) exportWithMorph
 
 		
 
@@ -564,10 +566,10 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 				--hideByCategory.none()
 				--unhide $*
-				isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
+				--isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
 				selectBeforeExport()
 
-				animationExportSetUp (frameRate as float)
+				animationExportSetUp (frameRate as float) exportWithMorph
 
 				fileName = ExtractFile()
 				--logDir = makeExportogDir()
@@ -588,7 +590,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 
 			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
 
-			isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
+			--isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
 			selectBeforeExport()
 			
 			fileName = ExtractFile()

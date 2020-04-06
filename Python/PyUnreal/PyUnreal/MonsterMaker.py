@@ -1,7 +1,7 @@
 import unreal
 
-blendSpace_dir = input()
 #blendSpace_dir = "/Game/Art/Character/Monster/CH_M_NA_03/Animation/BlendSpace"
+
 
 bs_lists = unreal.EditorAssetLibrary.list_assets(blendSpace_dir)
 bs_assets_list = []
