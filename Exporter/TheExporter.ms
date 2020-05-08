@@ -16,11 +16,12 @@ include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\keyReducer\\SelectedKeyReduc
 Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms" --get EVE Body Nodes "USE ONLY Body 1~4"
 Global FacialNodes = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\FacialNodes.ms" -- "NO USE" now we use BlendShape Only
 Global LastExportPath = ( (GetDir #userScripts) + "\\" + "LastExportPath.ms" ) -- get UserOwn Last Export Path
-Global eveLogo = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Logo\\eveLogo.bmp" -- get EVELOGO image
+Global eveLogo = "\\\\10.220 .70.12\\eve\\ART_Backup\\Script\\Logo\\eveLogo.bmp" -- get EVELOGO image
 Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" ) -- get UserOWN Exporter setting ini
 
 
 Global exportWithMorph = false 
+Global exportWithRootMotion = false
 fn grabchildren aBone childArray:#() getSelf:true = 
 (
 	for cBone in aBone.children do
@@ -283,9 +284,40 @@ fn isRootNodeisRoot =
 
 fn selectMeshesOnly = --wrappingCode 
 (
-	deselect $*
-	ar_meshObjs = getMeshObjs()
-	select ar_meshObjs
+	isRootHere = isValidNode $Root
+	local isSkin = false 
+
+	if not isRootHere do 
+	(
+		root = Dummy()
+		
+		root.name = "Root"
+	)
+	
+	for i in selection do 
+	(
+		if i.modifiers.count == 0 then 
+		(
+			addModifier i (Skin())
+			skinOps.addBone i.modifiers[#Skin] $Root 1
+		)
+		else 
+		(
+			for j=1 to i.modifiers.count do 
+			(
+				local hasSkin = isKindof i.modifiers[j] Skin
+				if hasSkin do 
+				(
+					isSkin = true 
+				)
+			)
+			if not isSkin do 
+			(
+				addModifier i (Skin())
+				skinOps.addBone i.modifiers[#Skin] $Root 1
+			)
+		)
+	)
 )
 
 
@@ -343,6 +375,7 @@ fn selectBeforeExport =
 				3 : --when Export Meshes Only 
 				(
 					selectMeshesOnly()
+					getSkinObjs()
 					--ddl_facialSetting.enabled = false
 				)
 			)
@@ -369,6 +402,7 @@ fn selectBeforeExport =
 				3 : --when Export Meshes Only 
 				(
 					selectMeshesOnly()
+					getSkinObjs()
 				)
 			)
 					
@@ -390,6 +424,7 @@ fn selectBeforeExport =
 				3 : -- when Export Meshes Only 
 				(
 					selectMeshesOnly()
+					getSkinObjs()
 				)
 			)
 		)
@@ -443,7 +478,7 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 	button 'btn_FilePath' "Select Export Path" pos:[24,394] width:93 height:34 align:#left
 	editText 'et_FilePath' "" pos:[120,393] width:343 height:35 align:#left
 	dropDownList 'ddl_Species' "Species" pos:[20,461] width:448 height:41 items:#("PC(EVE)", "MOB(NA)", "Weapon(WP)") align:#left selection:Species
-	dropDownList 'ddl_exportOption' "Export Option" pos:[20,500] width:448 height:41 items:#("Bones + Mesh", "Bones Only", "Mesh Only", "All") selection:exportOption align:#left
+	dropDownList 'ddl_exportOption' "Export Option" pos:[20,500] width:448 height:41 items:#("Bones + Mesh", "Bones Only", "Selected Mesh Only", "All", "Selected") selection:exportOption align:#left
 	button 'btn_export' "Export" pos:[305,20] width:158 height:90 align:#left
 	groupBox 'grp1' "Import / Export" pos:[9,5] width:467 height:118 align:#left
 	progressBar 'pgb_process' "Exporting..." pos:[22,621] width:440 height:20 align:#left
@@ -563,7 +598,10 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 				loadMaxFile i quiet:true
 				units.systemScale = 1
 
-				makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
+				if exportWithRootMotion do 
+				(
+					makeRootMotion RootMotionMaker.Species.Selection--Extract RootMotion 
+				)
 				--hideByCategory.none()
 				--unhide $*
 				--isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
@@ -588,8 +626,10 @@ rollout 'Exporter' "The Exporter 1.0" width:505 height:723
 
 			units.SystemScale = 1
 
-			makeRootMotion isXAxisChecked isYAxisChecked isYawChecked isKeepingDistance rotateAngle--Extract RootMotion 
-
+			if exportWithRootMotion do 
+			(
+				makeRootMotion RootMotionMaker.Species.Selection
+			)
 			--isRootNodeisRoot() -- Root노드가 없으면 Root노드를 생성, hierachy도 맞춰줌 
 			selectBeforeExport()
 			

@@ -7,6 +7,7 @@ fn getThisDir =
 	)
 
 	Global this = getThisDir() + "\\image\\"
+	Global iUVDivider = 2
 
 	obj  = (selection as array)[1]
 
@@ -28,7 +29,7 @@ fn getThisDir =
 
 		try(destroyDialog UVW_Trans) Catch()
 
-		rollout UVW_Trans "UVW_Transform" width:352 height:360
+		rollout UVW_Trans "UVW_Transform" width:352 height:400
 		(
 			groupBox 'grp1' "" pos:[8,8] width:160 height:168 align:#left 
 			button 'btn27' "Button" pos:[16,24] width:72 height:72 align:#left images:#(This+"Scale02_2.png", undefined, 1,1,1,1,1)
@@ -51,23 +52,29 @@ fn getThisDir =
 			button 'btn44' "Button" pos:[224,304] width:72 height:40 align:#left images:#(This+"move_1.png", undefined, 1,1,1,1,1)
 			button 'btn45' "Button" pos:[296,235] width:40 height:72 align:#left images:#(This+"move_3.png", undefined, 1,1,1,1,1)
 			label 'lb1' "MOVE" pos:[245,265]
+			Spinner 'divider' "Scaling Divider 1 / : " pos:[16,370] range:[1,10,2] type:#integer
+
+			on divider changed val do 
+			(
+				iUVDivider = val as float 
+			)
 			
 			/*DownScale diagonal Group*/
 			on btn27 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 0.5 [0,1,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0/iUVDivider) (1.0/iUVDivider) [0,1,0]
 			)
 			on btn28 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 0.5 [1,1,1]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0/iUVDivider) (1.0/iUVDivider) [1,1,1]
 			)
 			on btn29 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 0.5 [0,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0/iUVDivider) (1.0/iUVDivider) [0,0,0]
 			)
 			on btn30 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 0.5 0.5 [1,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0/iUVDivider) (1.0/iUVDivider) [1,0,0]
 			)
 			/*DownScale diagonal Group*/
 			
@@ -75,19 +82,19 @@ fn getThisDir =
 			/*UpScale diagonal Group*/
 			on btn31 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 2.0 2.0 [0,1,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0*iUVDivider) (1.0*iUVDivider) [0,1,0]
 			)
 			on btn32 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 2.0 2.0 [1,1,1]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0*iUVDivider) (1.0*iUVDivider) [1,1,1]
 			)
 			on btn33 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 2.0 2.0 [0,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0*iUVDivider) (1.0*iUVDivider) [0,0,0]
 			)
 			on btn34 pressed do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY 2.0 2.0 [1,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.ScaleSelectedXY (1.0*iUVDivider) (1.0*iUVDivider) [1,0,0]
 			)
 			/*UpScale diagonal Group*/
 			
@@ -115,22 +122,24 @@ fn getThisDir =
 			/* Move Group */
 			on btn39 pressed  do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [0,0.25,0]
+				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [0,(0.5/iUVDivider),0]
 			)
 				on btn43 pressed  do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [-0.25,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [(-0.5/iUVDivider),0,0]
 			)
 				on btn44 pressed  do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [0,-0.25,0]
+				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [0,(-0.5/iUVDivider),0]
 			)
 				on btn45 pressed  do
 			(
-				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [0.25,0,0]
+				$.modifiers[#unwrap_uvw].unwrap2.MoveSelected [(0.5/iUVDivider),0,0]
 			)
 			/* Move Group */
 		)
+
+		Try( DestroyDialog UVW_Trans) Catch()
 		CreateDialog UVW_Trans
 	)
 	else 

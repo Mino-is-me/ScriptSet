@@ -8,6 +8,6 @@ set scriptDest=%localappdata%\Autodesk\3dsMax\2020 - 64bit\ENU\usermacros\
 set iconDest=%localappdata%\Autodesk\3dsMax\2020 - 64bit\ENU\usericons\
 
 
-copy Script\* "%scriptDest%"
+copy Script\ "%scriptDest%"
 echo.
 pause

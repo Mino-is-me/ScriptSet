@@ -15,7 +15,7 @@ AnimEnd = AnimationRange.end as integer / 160
 
 
 FrameCount = AnimEnd-AnimStart + 1
-
+/*
 fn objToVector object =
 (
 	startPos = object.pos
@@ -28,6 +28,7 @@ fn objToVector object =
 	print ( object.name + ": " +  vector as string )
 	return vector
 )
+*/
 
 -------------------Position Controller-----------------------
 /*
@@ -38,7 +39,7 @@ dm_reflectCOM.pos.controller.appendTarget $Bip001_Head 50.0
 dm_reflectCOM.pos.controller.relative = on 
 */
 --dm_reflectCOM.parent = $Bip001 
-sliderTime = AnimationRange.start 
+sliderTime = AnimationRange.Start 
 
 -------------------Position Controller-----------------------
 dm_reflectCOM.position.controller = Position_Constraint()
@@ -97,6 +98,12 @@ for i=AnimationRange.start to AnimationRange.end do
     $Root.pos = ar_COMPos[cnt1]
 	--print ar_COMPos[cnt1]
     $Root.pos.z = 0
+	/*
+	if sliderTIme == AnimationRange.end do 
+	(
+		$Root.transform = (matrix3 [0.916889,-0.399142,3.27826e-07] [0.399142,0.916889,0] [-3.57628e-07,0,1] [297.307,-281.175,1.52588e-05])
+    )
+    */
 	--print $Root.pos
     --$Root.rotation = ar_reflectedRot[frCNT]
 	--$Root.rotation = ar_COMRot[frCNT]
