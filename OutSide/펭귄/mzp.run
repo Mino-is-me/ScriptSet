@@ -1,0 +1,12 @@
+name "Kenzors Script pack 1.000" 
+version 1000 
+
+treeCopy "KenzorsScripts" to "$userscripts"
+Copy userMacros\*.mcr to $userMacros
+Copy userIcons\*.bmp to $userIcons
+
+run InstalledKenzorOk.ms
+
+drop InstalledKenzorOk.ms
+
+clear temp

@@ -1,0 +1,71 @@
+<?xml version="1.0"> encoding="UTF-8" standalone="yes"?>
+<NodeLists>
+    <Ab-R-Ax2>
+        <PositionController>
+            OBJ_A = Bip001-R-Thigh
+            
+            A_Pos = ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).position )
+            A_Rot = ( ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).rotation ) as eulerAngles)
+
+            if A_Rot.y > 0 then AX = A_Pos.x + ( degtorad ( A_Rot.y / 2 ) )
+            else AX = A_Pos.x
+
+            if A_Rot.y > 0 then AY = A_Pos.y - ( degtorad ( A_Rot.y / 5 ) )
+            else AY = A_Pos.y
+
+            if A_Rot.y > 0 then AZ = A_Pos.z - ( degtorad ( A_Rot.y / 10 ) )
+            else AZ = A_Pos.z
+
+            [AX, AY, AZ]
+            <X_Position>
+                X_PositionScript
+            </X_Position>
+            <Y_Position>
+                Y_ScriptDiscription
+            </Y_Position>
+            <Z_Position>
+                Z_ScriptDiscription
+            </Z_Position>
+        </PositionController>
+        <RotationController>
+            OBJ_A = Bip001-R-Thigh
+
+            A_Rot = ( ( (OBJ_A.transform * (inverse OBJ_A.parent.transform) ).rotation ) as eulerAngles)
+
+            if A_Rot.y > 0 then AX = -( A_Rot.y / 3 )
+            else AX = 0
+
+            if A_Rot.y > 0 then AY = -( A_Rot.y / 50 )
+            else AY = -( A_Rot.y / 10 )
+
+            if A_Rot.z > 0 then AZ = ( A_Rot.z - 180 ) / 10
+            else AZ = ( 180 + A_Rot.z ) /10 
+
+            ( EulerAngles AX AY AZ )
+            <X_Rotation>
+                X_RotationScript
+            </X_Rotation>
+            <Y_Rotation>
+                Y_RotationScript
+            </Y_Rotation>
+            <Z_Rotation>
+                Z_RotationScript
+            </Z_Rotation>
+        </RotationController>
+        <ScaleController>
+            ScaleScript 
+            <X_Scale>
+                X_ScaleScript
+            </X_Scale>
+            <Y_Scale>
+                Y_ScaleScript
+            </Y_Scale>
+            <Z_Scale>
+                Z_ScaleScript 
+            </Z_Scale>
+        </ScaleController>
+    </Ab-R-Ax>
+</NodeLists>
+
+
+

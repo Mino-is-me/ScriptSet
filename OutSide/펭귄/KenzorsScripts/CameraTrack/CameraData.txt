@@ -1,0 +1,11 @@
+Kenzors Camera Data file version, 1 
+Red Epic 4k, 4096, 2160, 22.118 
+Red Epic 2k, 2048, 1080, 22.118
+Red One, 3840, 2160, 20.736
+Arri Alexa HD, 1920,1080, 23.76
+Arri Alexa 3k, 2880,1620, 23.76
+Arri Alexa 2k, 2048,1152, 23.66
+Arri Alexa raw, 2880,2160, 23.66
+Sony F55 4k, 4096,2160, 22.61
+Sony F55 2k, 2048, 1080, 22.61
+Sony PXW-FS7 HD, 1920,1080, 20.8
