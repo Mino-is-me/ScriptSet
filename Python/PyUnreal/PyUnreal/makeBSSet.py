@@ -1,29 +1,42 @@
 import unreal 
-#Find and Make MOB BS Set 
-__blendspace_dir__ = "/Game/Art/Character/Monster/CH_M_NA_03/Animation/BlendSpace"
-#Find && Make BS Assets 
+assetPath = "/Game/Art/Character/Monster/CH_M_NA_23/Animation/BlendSpace/" 
+bsNames = ["IdleRun_BS_Peaceful", "IdleRun_BS_Battle", "Down_BS", "Groggy_BS", "LieDown_BS", "LockOn_BS", "Airborne_BS"]
+#animNames = ['Result_State_KnockDown_L'] #애니메이션 리스트 지정 
+Base1D = assetPath + "Base_BS_1D"
+Base2D = assetPath + "Base_BS_2D"
 
-__bs_lists__ = ['Airborne_BS','Dead_BS','Down_BS','GetUp_BS','Groggy_BS','IdleRun_BS_Peaceful','LockOn_BS','IdleRun_BS_Battle']
+
+#공용 BlendSample 제작 
+defaultSamplingVector = unreal.Vector(0.0, 0.0, 0.0)
+defaultSampler = unreal.BlendSample()
+defaultSampler.set_editor_property("sample_value",defaultSamplingVector)
 
 
-for i in __bs_lists__:
-    __to_find_bs_name__ = __blendspace_dir__ + "/" + i 
-    #__loaded_asset__ = unreal.load_asset(__to_find_bs_name__)
-    __is_valid_asset__ = unreal.EditorAssetLibrary.does_asset_exist(__to_find_bs_name__)
-    #find asset by be made name py
-    if __is_valid_asset__: #when is asset valid 
-        print("this BlendSpace is Exist ")
-        __temp_bs_asset_for_duplicate__ = __to_find_bs_name__
-    else: #when is asset NOT Valid 
-        __str_to_print__ = "Need Asset : " + i 
-        print(__str_to_print__) #print log 
-        __duplicated_bs_asset__ = unreal.EditorAssetLibrary.duplicate_asset(__temp_bs_asset_for_duplicate__)
-        #__loaded_bs_asset__ = unreal.EditorAssetLibrary.load_asset(__duplicated_bs_asset__) 오브젝트 찾았으니 굳이 로드 한번 더 안해도 됨 
-        __path_of_loaded_asset__ = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(__loaded_bs_asset__)
-        __renamed_asset_path__ = unreal.EditorAssetLibrary.rename_asset( __path_of_loaded_asset__, __str_to_print__)
-        print(__renamed_asset_path__) #print log for duplicate&&rename Success
+for i in bsNames:
+    bsDir = assetPath + i
+    #2D BS로 제작해야할 경우 / LockOn_BS
+    if i == "LockOn_BS":
+        unreal.EditorAssetLibrary.duplicate_asset(Base2D,bsDir)
+    else:
+        BSLoaded = unreal.EditorAssetLibrary.duplicate_asset(Base1D,bsDir)
+
+
         
-        __loaded_renamed_asset__ = unreal.EditorAssetLibrary.load_asset(__renamed_asset_path__)
-        #Load BlendSpace Object and Set Animsequence by founded Name 
+
+'''
+testAssetLoaded = assetPath + bsNames[3]
+BsLoaded = unreal.EditorAssetLibrary.load_asset(testAssetLoaded)
+
+ASequence1 = unreal.EditorAssetLibrary.load_asset('/Game/Art/Character/Monster/CH_M_NA_23/Animation/Result_State_KnockDown_L')
 
 
+
+defaultSamplingVector = unreal.Vector(0.0, 0.0, 0.0)
+defaultSampler = unreal.BlendSample()
+
+
+defaultSampler.set_editor_property("sample_value",defaultSamplingVector)
+defaultSampler.set_editor_property("animation",ASequence1)
+
+BsLoaded.set_editor_property("sample_data",[defaultSampler])
+'''
