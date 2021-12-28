@@ -1,5 +1,3 @@
---SkinTheif
---½ºÅ²µ¥ÀÌÅÍ (½ºÅ²°ü¿©º» ¹× ½ºÅ²µ¥ÀÌÅÍ ¿Å±æ ¶§ »ç¿ë)
 Global floater_skinTheif
 
 Try
@@ -16,15 +14,15 @@ function fn_switchPathFlag str_Dir =
 	return switchedDir
 )
 
-fn fn_getSkinBoneName obj  =					--skinµÈ bone ÀÌ¸§À» ¹è¿­·Î µ¹·ÁÁÜ
+fn fn_getSkinBoneName obj  =					--skinï¿½ï¿½ bone ï¿½Ì¸ï¿½ï¿½ï¿½ ï¿½è¿­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 (
-	setCommandPanelTaskMode mode:#modify  			-- modfiy pannel ¼±ÅÃ
-	select obj														  			-- object ¼±ÅÃ
-	skinModifier =  Obj.modifiers[#Skin]              			-- skinModifierÀÇ º¯¼öÈ­
+	setCommandPanelTaskMode mode:#modify  			-- modfiy pannel ï¿½ï¿½ï¿½ï¿½
+	select obj														  			-- object ï¿½ï¿½ï¿½ï¿½
+	skinModifier =  Obj.modifiers[#Skin]              			-- skinModifierï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
 		
-	boneCount = skinOps.GetNumberBones skinModifier	--skin¿¡ Àû¿ëµÈ Bone °¹¼ö¸¦ ¾Ë¾Æ³¿
+	boneCount = skinOps.GetNumberBones skinModifier	--skinï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Bone ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æ³ï¿½
 		
-	boneNames = for i in 1 to boneCount collect skinOps.GetBoneName skinModifier i 1	--bonNameº¯¼ö¿¡ ½ºÅ²¿¡ Àû¿ëµÈ Bone name (string)Á¤º¸¸¦ ´ëÀÔ
+	boneNames = for i in 1 to boneCount collect skinOps.GetBoneName skinModifier i 1	--bonNameï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å²ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ Bone name (string)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	return boneNames
 )
 
@@ -54,7 +52,7 @@ Rollout skinTheif "Skin Theif"
 			)
 			close fileSTM
 		)
-		else MessageBox "¼±ÅÃµÈ ¿ÀºêÁ§Æ® ¾øÀ½."
+		else MessageBox "ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½."
 	)
 	
 	on btn_setSkinData pressed do
@@ -74,14 +72,11 @@ Rollout skinTheif "Skin Theif"
 			DeleteFile file
 
 		)
-		else MessageBox "¼±ÅÃµÈ ¿ÀºêÁ§Æ® ¾øÀ½."
+		else MessageBox "ï¿½ï¿½ï¿½Ãµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½."
 	)
 )--CreateDialog skinTheif
 	
-
 	floater_skinTheif = newRolloutFloater "Skin Theif" 180 50
 	addRollout skinTheif floater_skinTheif
-	cui.RegisterDialogBar floater_skinTheif
-	cui.DockDialogBar floater_skinTheif #cui_dock_bottom
 
 
