@@ -115,7 +115,7 @@ include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
 			
 			label xx "" across:3
 			Spinner spi_Unit "unit" range:[1,1000,UnitSize] type:#integer scale:1 fieldWidth:20 			
-			Button btn_Unit "?" 
+			--Button btn_Unit "?" 
 			on rlt_Info Open do 
 			(
 				spi_Unit.Value = UnitSize
@@ -135,11 +135,11 @@ include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
 
 	-- 전반적으로 뜯어고치기 --
 		
-	Rollout rlt_manage "Manage"
+	Rollout rlt_manage "Reset"
 	(
-		Button btn_resetScale "ResetScale" across:4
-		Button btn_resetXForm "ResetXForm"
-		Button btn_resetGizmo "ResetGizmo"
+		Button btn_resetScale "Scale" across:4
+		Button btn_resetXForm "XForm"
+		Button btn_resetGizmo "Gizmo"
 		DropDownList ddl_Axis "" items:#("X","Y","Z")
 
 		on btn_resetScale pressed do
@@ -168,25 +168,13 @@ include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\stella.ms"
 	)
 	-- 전반적으로 뜯어고치기 --	
 
-	Flt_support = newRolloutFloater "Support" 250 50
+	Flt_support = newRolloutFloater "SOMI" 250 250
 	addRollout rlt_CatHide Flt_support
-	cui.RegisterDialogBar Flt_support
-	cui.DockDialogBar Flt_support #cui_dock_Bottom
-	
-	Flt_observe = newRolloutFloater "Organize" 200 50
-	addRollout rlt_Orga Flt_observe	
-	cui.RegisterDialogBar Flt_observe
-	cui.DockDialogBar Flt_observe #cui_dock_Bottom
-
-	Flt_interface = newRolloutFloater "Manage" 350 50
-	addRollout rlt_manage Flt_interface	
-	cui.RegisterDialogBar Flt_interface
-	cui.DockDialogBar Flt_interface #cui_dock_Bottom
-	
-	Flt_interface = newRolloutFloater "information" 100 50
-	addRollout rlt_Info Flt_interface	
-	cui.RegisterDialogBar Flt_interface
-	cui.DockDialogBar Flt_interface #cui_dock_Bottom
+	addRollout rlt_Orga Flt_support	
+	addRollout rlt_manage Flt_support	
+	addRollout rlt_Info Flt_support	
+	--cui.RegisterDialogBar Flt_interface
+	--cui.DockDialogBar Flt_interface #cui_dock_Bottom
 	
 --	fileIn "C:\Users\minomi\Desktop\Script_개발중\SkinTheif.ms"
 --	macros.run "BlessConsol" "LWorkFlow"

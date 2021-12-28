@@ -13,6 +13,7 @@ include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RMAngle
 include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionExtracter.ms" -- Root Motion Extracter Include 
 include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\keyReducer\\SelectedKeyReducer.ms" -- TAZO (Baked Key Cleaner) Include
 include "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RiggerScripts\\AttributesManager.ms"
+--include "\\\\10.220.70.12\\eve_\\ART_Backup\\Script\\SkinThief\\SkinThief.ms" -- SkinThief
 
 Global BodyNodes ="\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes.ms" --get EVE Body Nodes "USE ONLY Body 1~4"
 Global BodyNodes_new = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Exporter\\BodyNodes_new.ms"
@@ -1087,11 +1088,12 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 
 rollout awesomeTools "Awesome Tools!(BETA)"
 (
-	button btn_ctrlGlue "Controller Glue" across:5
+	button btn_ctrlGlue "Controller Glue" across:6
 	button btn_somi "SOMI"
 	button btn_backupFolder "BackUpFolder"
 	button btn_FaceMerger "FaceMerger"
 	button btn_bakeCam "CameraBaker"
+	button btn_skinTheif "SkinTheif"
 	on btn_ctrlGlue pressed do 
 	(
 		filein (projectDir + "ControllerGlue\\ControllerGlue.ms")
@@ -1116,6 +1118,10 @@ rollout awesomeTools "Awesome Tools!(BETA)"
 	on btn_bakeCam pressed do 
 	(
 		filein (projectDir + "LinkSkill_CamBoneMaker\\cameraBaker.ms")
+	)
+	on btn_skinTheif pressed do 
+	(
+		filein (projectDir + "SkinThief\\SkinTheif.ms")
 	)
 )
 
