@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SimplygonPreset Id="71bef543-11f3-4158-94bf-3a6e51b506b3" Name="Deco" Tooltip="" Version="3.0" Path="C:\Users\guseh\OneDrive\문서\Simplygon\8\UI\Presets\EVE Presets\Deco.preset" MinNodeCount="1" MaxNodeCount="9" DefaultTBNType="SG_TANGENTSPACEMETHOD_ORTHONORMAL" DefaultTBNTypeIsHidden="False" DefaultTBNTypeLocked="False" AllowGPUAcceleration="False">
+  <Node LockedComponents="[]" IsCascaded="False">
+    <Settings Name="Reduction">
+      <Parameter Key="DataCreationPreferences" Value="SG_DATACREATIONPREFERENCES_PREFER_OPTIMIZED_RESULT" MinValue="SG_DATACREATIONPREFERENCES_ONLY_USE_ORIGINAL_DATA" MaxValue="SG_DATACREATIONPREFERENCES_ONLY_USE_ORIGINAL_DATA" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DataCreationPreferencesEnum" />
+      <Parameter Key="EdgeSetImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="GeometryImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="GroupImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="KeepSymmetry" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="MaterialImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="MaxDeviation" Value="1" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="OnScreenSize" Value="300" MinValue="20" MaxValue="5000" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="IntRangeParameter" />
+      <Parameter Key="ProcessSelectionSetName" Value="" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="StringParameter" />
+      <Parameter Key="ReductionHeuristics" Value="SG_REDUCTIONHEURISTICS_FAST" MinValue="SG_REDUCTIONHEURISTICS_FAST" MaxValue="SG_REDUCTIONHEURISTICS_FAST" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="ReductionHeuristicsEnum" />
+      <Parameter Key="ReductionTargets" Value="SG_REDUCTIONTARGET_TRIANGLERATIO" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="ReductionTargetsEnum" />
+      <Parameter Key="ShadingImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="SkinningImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="SymmetryAxis" Value="YPos" MinValue="ZPos" MaxValue="ZPos" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="AxisEnum" />
+      <Parameter Key="SymmetryOffset" Value="0" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="TextureImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="TriangleCount" Value="1000" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="IntParameter" />
+      <Parameter Key="TriangleRatio" Value="45" MinValue="0" MaxValue="100" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleRangeParameter" />
+      <Parameter Key="UseAutomaticSymmetryDetection" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="UseVertexWeights" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="VertexColorImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+    </Settings>
+    <Settings Name="Repair">
+      <Parameter Key="TjuncDist" Value="0" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="DoubleParameter" />
+      <Parameter Key="UseTJunctionRemover" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="WeldDist" Value="0" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="WeldOnlyObjectBoundary" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+    </Settings>
+    <Settings Name="NormalCalculation">
+      <Parameter Key="HardEdgeAngleInRadians" Value="75" MinValue="0" MaxValue="120" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="DoubleRangeParameter" />
+      <Parameter Key="RepairInvalidNormals" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="ReplaceNormals" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+    </Settings>
+  </Node>
+  <Node LockedComponents="[]" IsCascaded="False">
+    <Settings Name="Reduction">
+      <Parameter Key="DataCreationPreferences" Value="SG_DATACREATIONPREFERENCES_PREFER_OPTIMIZED_RESULT" MinValue="SG_DATACREATIONPREFERENCES_ONLY_USE_ORIGINAL_DATA" MaxValue="SG_DATACREATIONPREFERENCES_ONLY_USE_ORIGINAL_DATA" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DataCreationPreferencesEnum" />
+      <Parameter Key="EdgeSetImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="GeometryImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="GroupImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="KeepSymmetry" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="MaterialImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="MaxDeviation" Value="1" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="OnScreenSize" Value="300" MinValue="20" MaxValue="5000" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="IntRangeParameter" />
+      <Parameter Key="ProcessSelectionSetName" Value="" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="StringParameter" />
+      <Parameter Key="ReductionHeuristics" Value="SG_REDUCTIONHEURISTICS_FAST" MinValue="SG_REDUCTIONHEURISTICS_FAST" MaxValue="SG_REDUCTIONHEURISTICS_FAST" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="ReductionHeuristicsEnum" />
+      <Parameter Key="ReductionTargets" Value="SG_REDUCTIONTARGET_TRIANGLERATIO" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="ReductionTargetsEnum" />
+      <Parameter Key="ShadingImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="SkinningImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="SymmetryAxis" Value="YPos" MinValue="ZPos" MaxValue="ZPos" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="AxisEnum" />
+      <Parameter Key="SymmetryOffset" Value="0" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="TextureImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+      <Parameter Key="TriangleCount" Value="1000" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="IntParameter" />
+      <Parameter Key="TriangleRatio" Value="25" MinValue="0" MaxValue="100" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleRangeParameter" />
+      <Parameter Key="UseAutomaticSymmetryDetection" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="UseVertexWeights" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="VertexColorImportance" Value="Normal" MinValue="Off" MaxValue="Highest" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="FeatureImportanceEnum" />
+    </Settings>
+    <Settings Name="Repair">
+      <Parameter Key="TjuncDist" Value="0" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="DoubleParameter" />
+      <Parameter Key="UseTJunctionRemover" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="WeldDist" Value="0" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="DoubleParameter" />
+      <Parameter Key="WeldOnlyObjectBoundary" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+    </Settings>
+    <Settings Name="NormalCalculation">
+      <Parameter Key="HardEdgeAngleInRadians" Value="75" MinValue="0" MaxValue="120" IsHidden="False" IsLocked="False" UserEnabled="False" TypeOf="DoubleRangeParameter" />
+      <Parameter Key="RepairInvalidNormals" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+      <Parameter Key="ReplaceNormals" Value="False" IsHidden="False" IsLocked="False" UserEnabled="True" TypeOf="BooleanParameter" />
+    </Settings>
+  </Node>
+</SimplygonPreset>

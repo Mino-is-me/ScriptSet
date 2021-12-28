@@ -1,5 +1,14 @@
 ExposeCOM = Point() 
 sliderTime = AnimationRange.start 
+MovementBones = #($'Bip001',$'Bip001 Pelvis')
+
+for i in MovementBones do 
+(
+    if i.modifiers.count > 0  do 
+    (
+        i.modifiers[1].enabled = false 
+    )
+)
 
 BaseOrigin = $Root.transform 
 set Animate On 
@@ -9,7 +18,9 @@ for i = AnimationRange.start to AnimationRange.end do
     ExposeCOM.transform = $Bip001.transform 
 )
 sliderTime = AnimationRange.start
-deleteKeys $Base.controller #allKeys
+
+
+deleteKeys $Root.children[1].controller #allKeys
 
 numLayersCOM = biped.numLayers $Bip001.controller
 if numLayersCOM != 0 then 
@@ -28,3 +39,12 @@ for i = AnimationRange.start to AnimationRange.end do
 )
 
 Set Animate Off
+
+
+for i in MovementBones do 
+(
+    if i.modifiers.count > 0  do 
+    (
+        i.modifiers[1].enabled = true 
+    )
+)

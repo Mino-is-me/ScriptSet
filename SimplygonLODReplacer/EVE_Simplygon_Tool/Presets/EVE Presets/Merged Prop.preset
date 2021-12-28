@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SimplygonPreset Id="133aeda7-47e8-49ea-9c36-83cfc0901aeb" Name="Merged Prop" Tooltip="" Version="3.0" Path="C:\Users\SHIFTUP\Documents\Simplygon\8\UI\Presets\New folder\Merged Prop.preset" MinNodeCount="1" MaxNodeCount="9" DefaultTBNType="SG_TANGENTSPACEMETHOD_ORTHONORMAL" DefaultTBNTypeIsHidden="False" DefaultTBNTypeLocked="False" AllowGPUAcceleration="False">
+  <Node LockedComponents="[]" IsCascaded="False" />
+</SimplygonPreset>

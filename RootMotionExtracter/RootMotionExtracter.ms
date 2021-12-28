@@ -2,6 +2,7 @@ global isXAxisChecked = false
 global isYAxisChecked = false 
 global isYawChecked = false 
 global isKeepingDistance = false 
+global isBakePropKey = false 
 global euRotateAngle = (eulerAngles 0 0 0)
 
 Global InitialTransformSetting = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\InitTransforms.ini"
@@ -59,12 +60,14 @@ Rollout RootMotionMaker "Extract Root Motion"
 		--label Warning "*Mino is Fixing this Stuff, Thanks for your excuse*"
 		checkBox withRootMotion "Export with Root Motion" across:2
 		checkBox FrontBackOnly "Front and Back Only"
+		checkBox bipAfterBaker "Bake Prop Key"
 		--checkBox keepOffset "Keep Offset Between Root and COM" enabled:false
 		/*
 		checkBox ManualRotation "Use Manual Rotation" enabled:false across:2
 		spinner rotateAngles "Rotate Angle" range:[-360,360,0] type:#integer Across:2 enabled:false
 		*/
-		button extractOnly "Extract Root Motion non export" enabled:true align:#Left
+		button extractOnly "Extract Root Motion non export" enabled:true align:#Left across:2
+		checkBox isCTRL "Use Controllers" 
 		DropDownList Species "Species" items:#("Basic","M_Lion","M_Grub","M_Gorilla")
 		slider TimingSlider "where is Idle Pos" range:[0,1,0] type:#integer
 		--button debug "Do not use this except who can handle this"
@@ -83,10 +86,17 @@ Rollout RootMotionMaker "Extract Root Motion"
 	(
 		isXAxisChecked = val 
 	)
+
+	on bipAfterBaker Changed val do 
+	(
+		isBakePropKey = val 
+	)
+
 	on TimingSlider Changed val do 
 	(
 		IdlePos = val 
 	)
+	
 	on withRootMotion changed val do 
 	(
 		if val == true then 
@@ -171,8 +181,14 @@ Rollout RootMotionMaker "Extract Root Motion"
 
 	on extractOnly pressed do 
 	(
-
-		makeRootMotion RootMotionMaker.Species.Selection
+		if RootMotionMaker.Species.Selection == 1 then 
+		(
+			fileIn "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionTest.ms"
+		)
+		else if RootMotionMaker.Species.Selection == 2 then 
+		(
+			fileIn "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotion_MultiLegs.ms"
+		)
 	)
 
 )--createDialog RootMotionMaker 505 200

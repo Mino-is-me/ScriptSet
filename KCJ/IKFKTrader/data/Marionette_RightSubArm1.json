@@ -1,0 +1,1 @@
+{"ctrlInfo": "R_SubArm_IKFKCtrl:7023", "ctrlAttr": "IKFK", "IKInfoList": ["R_SubArm_IKCtrl:129 ---> R_SubArm_3_FKJnt:142", "R_SubArm_IKPV_Ctrl:132 ---> R_SubArm_2_FKJnt:141"], "FKInfoList": ["R_SubArm_1_FKCtrl:118 ---> R_SubArm_1_IKJnt:137", "R_SubArm_2_FKCtrl:120 ---> R_SubArm_2_IKJnt:138", "R_SubArm_3_FKCtrl:122 ---> R_SubArm_3_IKJnt:139"], "IKValue": 0.0, "FKValue": 100.0}

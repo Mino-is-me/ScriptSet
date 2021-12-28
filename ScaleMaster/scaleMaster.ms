@@ -10,13 +10,26 @@ fn getScalingFactor iScalePer =
     return iscaleFactor
 
 )
-fn makePastedScene =
+
+
+
+fn CopyScene =
+(
 	thecopypastedir = getdir #autoback -- CHANGE THIS TO ANY FOLDER YOU WANT
 	thecopypastefile = "\pastefile.max" --this is the filename to save as...
 	thecopypastestring = thecopypastedir + thecopypastefile --this is the complete string
 	
 	if $ != undefined do 
 		saveNodes $ thecopypastestring --this saves ("copies") the objects as a file
+)
+
+fn PasteScene = 
+(
+    thecopypastedir = getdir #autoback -- CHANGE THIS TO ANY FOLDER YOU WANT
+	thecopypastefile = "\pastefile.max" --this is the filename to save as...
+	thecopypastestring = thecopypastedir + thecopypastefile --this is the complete string
+
+	mergemaxfile (thecopypastedir + thecopypastefile) #select --this merges ("pastes") and selects objects from file
 )
 
 fn sceneScaling iScalePer=
@@ -38,8 +51,15 @@ Rollout scaleMaster "Scale Master"
 
     on btn_scale pressed do 
     (
+        units.systemScale = ( spi_scale.value / 100.0  )
+        select $*
+        CopyScene()
+
+        resetMaxFile #noprompt
+
         units.systemScale = 1.0 
-        format "Rescale Scene\n"
+        PasteScene()
+
     )
 )
 createDialog scaleMaster 200 30 

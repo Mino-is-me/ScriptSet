@@ -3,12 +3,13 @@ global dir = ""
 global OriginSceneOld = getThisScriptFilename() 
 OriginScene = "Z:\\ART_Backup\\ScriptData\\CinemaFacialTool\\Origin_eve.max"
 OriginScene1 = "Z:\\ART_Backup\\ScriptData\\CinemaFacialTool\\Origin_lilly.max"
+OriginScene2 = "Z:\\ART_Backup\\ScriptData\\CinemaFacialTool\\Origin_Tachy.max"
 Try(destroyDialog FaceMerger) Catch()
 
 rollout FaceMerger "Face Merger"
 (
 	editText 'edt_Folder' "Directories : " 
-	dropDownList 'ddl_faceOwner' "Who?" items:#("EVE","Lilly") 
+	dropDownList 'ddl_faceOwner' "Who?" items:#("EVE","Lilly","Tachy") 
 	button 'btn_press' "←"
 	--dropDownList 'ddl_faceOwner' "Who?" items:#("EVE","Lilly") 
 	on btn_press pressed do 
@@ -23,6 +24,7 @@ rollout FaceMerger "Face Merger"
 			(
 				1 : loadMaxFile OriginScene quiet:true 
 				2 : loadMaxFile OriginScene1 quiet:true
+				3 : loadMaxFile OriginScene2 quiet:true 
 			)
 			importfile FBXFile[1] #noPrompt using:FBXIMP
 			
@@ -32,10 +34,12 @@ rollout FaceMerger "Face Merger"
 			(
 				1 : faceMesh = $EVE_Face_E
 				2 : faceMesh = $Lilly_Head
+				3 : faceMesh = $Tachy_Face
 			)
 			
 			local faceNameEVE = findString faceMesh.name "EVE" 
 			local faceNameLilly = findString faceMesh.name "Lilly"
+			local faceNameTachy = findString faceMesh.name "Tachy"
 			if faceNameEVE != undefined then 
 			(
 				faceMesh.material[1].diffuseMap = BitmapTexture fileName:"Z:\ART_Backup\ScriptData\CinemaFacialTool\TextureSet\EVE\diffuse_face.tga"
@@ -54,6 +58,11 @@ rollout FaceMerger "Face Merger"
 				faceMesh.material[3].diffuseMap.coords.V_Tiling = 1.5
 
 				setCVertMode faceMesh false
+			)
+
+			else if faceNameTachy != undefined do 
+			(
+
 			)
 
 

@@ -9,51 +9,67 @@ cnt = 0
 
 dm_reflectCOM = Dummy() 
 dm_RotationCOM = Dummy() 
-
+if (isValidNode $'Bip001 Prop1' ) then
+(
+	dm_reflectProp = Dummy()
+)
+else 
+(
+	dm_reflectProp = undefined
+)
 AnimStart = AnimationRange.start as integer / 160 
 AnimEnd = AnimationRange.end as integer / 160
 
+isXAxisChecked =  RootMotionMaker.FrontBackOnly.checked
+
+isCTRL = RootMotionMaker.isCTRL.checked 
 
 FrameCount = AnimEnd-AnimStart + 1
-/*
-fn objToVector object =
-(
-	startPos = object.pos
-	in coordsys object (tempPoint = point pos:[0,0,1])
-	endPos = tempPoint.pos
-	delete tempPoint
-	
-	vector = endPos - startPos
-	
-	print ( object.name + ": " +  vector as string )
-	return vector
-)
-*/
 
--------------------Position Controller-----------------------
-/*
-dm_reflectCOM.pos.controller = position_Constraint() 
 
-dm_reflectCOM.pos.controller.appendTarget $Bip001 50.0
-dm_reflectCOM.pos.controller.appendTarget $Bip001_Head 50.0 
-dm_reflectCOM.pos.controller.relative = on 
-*/
---dm_reflectCOM.parent = $Bip001 
+nCOM = getNodeByName "Bip001"
+nBase = getNodeByName "Base"
+nRoot = getNodeByName "Root"
+nProp = getNodeByName "Bip001 Prop1"
+
 sliderTime = AnimationRange.Start 
+
+
+if isCTRL then
+(
+	nCOM = getNodeByName "Bip001 Ctrl"
+	nBase = getNodeByName "Base Ctrl"
+	nRoot = getNodeByName "Root Ctrl"
+	nProp = getNodeByName "Bip001 Ctrl Prop1"
+)
+
+	
+	--nCOMParent = nCOM.parent
+
+
 
 -------------------Position Controller-----------------------
 dm_reflectCOM.position.controller = Position_Constraint()
-dm_reflectCOM.position.controller.appendTarget $Bip001 50.0 
+dm_reflectCOM.position.controller.appendTarget nCOM 50.0 
 dm_reflectCOM.position.controller.relative = on 
 -------------------Rotation Controller-----------------------
 dm_RotationCOM.rotation.controller = Orientation_Constraint() 
-dm_RotationCOM.rotation.controller.appendTarget $Bip001 50.0 
+dm_RotationCOM.rotation.controller.appendTarget nCOM 50.0 
 dm_RotationCOM.rotation.controller.relative = on 
 -------------------Rotation Controller-----------------------
 for i=AnimationRange.start to AnimationRange.end do 
 (
     sliderTime = i
 	cnt = cnt + 1
+	if isCTRL == false and dm_reflectProp != undefined  then 
+	(
+		with Animate On
+		(
+			dm_reflectProp.transform = nProp.transform 
+		)
+	)
+
+	
 	if isXAxisChecked then
 	(
 		newVec = [0,dm_reflectCOM.pos.y,dm_reflectCOM.pos.z]
@@ -62,14 +78,15 @@ for i=AnimationRange.start to AnimationRange.end do
 	(
 		newVec = dm_reflectCOM.pos 
 	)
-    newQuat = biped.getTransform $Bip001 #Rotation 
-	
-	comVec = biped.getTransform $Bip001 #Pos
+
+	newQuat = biped.getTransform nCOM #Rotation 
+	comVec = biped.getTransform nCOM #Pos
+
 
 /*
     if i == 0f then 
     (
-        append ar_RootPos $Root.pos 
+        append ar_RootPos Root.pos 
     )
     else 
     (
@@ -90,7 +107,7 @@ for i=1 to ar_COMPos.count do
 	ar_COMPos[i].z = 0 
 )
 
-$Bip001.parent = World 
+--COM.parent = World 
 
 Set Animate On 
 cnt1= 0
@@ -101,33 +118,27 @@ for i=AnimationRange.start to AnimationRange.end do
 	--print sliderTime 
 	frCNT = ( (i as integer) / 160) + 1 
 	--print frCNT 
-    $Root.pos = ar_COMPos[cnt1]
+    nRoot.pos = ar_COMPos[cnt1]
 	--print ar_COMPos[cnt1]
-    $Root.pos.z = 0
-	/*
-	if sliderTIme == AnimationRange.end do 
-	(
-		$Root.transform = (matrix3 [0.916889,-0.399142,3.27826e-07] [0.399142,0.916889,0] [-3.57628e-07,0,1] [297.307,-281.175,1.52588e-05])
-    )
-    */
-	--print $Root.pos
-    --$Root.rotation = ar_reflectedRot[frCNT]
-	--$Root.rotation = ar_COMRot[frCNT]
+    nRoot.pos.z = 0
+
 )
 Set Animate Off 
 
 --
 set Animate on 
 sliderTIme = AnimationRange.end 
-Rotate $Root euRotateAngle
+Rotate nRoot euRotateAngle
 set Animate Off 
 sliderTIme = AnimationRange.start 
 --
-$Bip001.parent=$Root
+--COM.parent=COMParent
 
 set Animate on 
 
-biped.createLayer $Bip001.controller 1 "RMotionLayer01"
+biped.createLayer nCOM.controller 1 "RMotionLayer01"
+
+
 
 sliderTime = AnimationRange.End
 sliderTime = AnimationRange.Start
@@ -139,9 +150,18 @@ for i=AnimationRange.start to AnimationRange.end do
 	cnt2=cnt2+1
 	frCNT = ( (i as integer) / 160) + 1 
 	
-	biped.setTransform $Bip001 #pos ar_originPos[cnt2] true 
-	biped.setTransform $Bip001 #Rotation ar_COMRot[cnt2] true 
-)
-Set Animate Off 
 
---DeleteKeys $Root.rotation.controller.Z_Rotation.controller #allKeys
+	biped.setTransform nCOM #pos ar_originPos[cnt2] true 
+	biped.setTransform nCOM #Rotation ar_COMRot[cnt2] true 
+
+	--prop bake
+	if isBakePropKey == true and nprop!=undefined do 
+	(
+		nProp.transform = dm_reflectProp.transform
+	)
+	--prop bake end
+)
+Set animate Off 
+
+
+sliderTime = animationRange.start

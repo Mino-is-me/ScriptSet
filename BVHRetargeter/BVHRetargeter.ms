@@ -112,9 +112,11 @@ rollout BVHRetargeter "BVH Retargeter"
 			
 			--biped.createNew 100 -90 [0,0,100] arms:true neckLinks:1 spineLinks:3
 			biped.loadMocapFile $Bip001.controller BVHFiles[i] --#prompt 
+			/*
 			biped.createLayer $Bip001.controller 1 "Layer_Retarget"
 			fn_retargetBone()
 			biped.collapseAtLayer $Bip001.Controller 0
+			*/
 			if BipSavePath != "" then 
 			(
 				savePath = fn_makeBipFileName BipSavePath BVHFiles[i]

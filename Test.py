@@ -1,9 +1,42 @@
 import unreal 
-assetPath = "/Game/Art/Character/PC/CH_P_EVE_01/Procedural_Animation/AnimSequence" 
+assetPath = "/Game/Art/Character/Monster/CH_M_NA_23/Animation/BlendSpace/" 
+bsNames = ["IdleRun_BS_Peaceful", "IdleRun_BS_Battle", "Down_BS", "Groggy_BS", "LieDown_BS", "LockOn_BS", "Airborne_BS"]
+animNames = ['Result_State_KnockDown_L']
+Base1D = assetPath + "Base_BS_1D"
+Base2D = assetPath + "Base_BS_2D"
 
-all_Asset = unreal.EditorAssetLibrary.list_assets(assetPath)
 
-all_Asset_Load = [unreal.EditorAssetLibrary.load_asset(a) for a in all_Asset]
+#공용 BlendSample 제작 
+defaultSamplingVector = unreal.Vector(0.0, 0.0, 0.0)
+defaultSampler = unreal.BlendSample()
+defaultSampler.set_editor_property("sample_value",defaultSamplingVector)
 
-for i in all_Asset_Load:
-    i.set_editor_property("enable_root_motion", True)
+
+for i in bsNames:
+    bsDir = assetPath + i
+    #2D BS로 제작해야할 경우 / LockOn_BS
+    if i == "LockOn_BS":
+        unreal.EditorAssetLibrary.duplicate_asset(Base2D,bsDir)
+    else:
+        BSLoaded = unreal.EditorAssetLibrary.duplicate_asset(Base1D,bsDir)
+
+
+        
+
+
+testAssetLoaded = assetPath + bsNames[3]
+BsLoaded = unreal.EditorAssetLibrary.load_asset(testAssetLoaded)
+
+ASequence1 = unreal.EditorAssetLibrary.load_asset('/Game/Art/Character/Monster/CH_M_NA_23/Animation/Result_State_KnockDown_L')
+
+
+
+defaultSamplingVector = unreal.Vector(0.0, 0.0, 0.0)
+defaultSampler = unreal.BlendSample()
+
+
+defaultSampler.set_editor_property("sample_value",defaultSamplingVector)
+defaultSampler.set_editor_property("animation",ASequence1)
+
+BsLoaded.set_editor_property("sample_data",[defaultSampler])
+

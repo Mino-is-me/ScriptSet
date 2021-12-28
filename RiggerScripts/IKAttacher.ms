@@ -95,7 +95,7 @@ the_IKAttach = attributes IKAttach
 		Button FKtoIKAni "FK -> IK"
 		--editText edtIKTargets "IK Targets"
 		
-		on Redraw Pressed do 
+		on params open do 
 		(
 			if IKTargets[1] != undefined do 
 			(

@@ -135,10 +135,10 @@ fn migrateTM =
 
 )
 Base = "C:\Users\Shiftup\Documents\Seq_Export\Game\Art\Character\PC\CH_P_EVE_01\Animation\BaseBIP.max"
-Files = getFiles "C:\Users\Shiftup\Documents\Seq_Export\Game\Art\Character\PC\CH_P_EVE_01\Animation\*.fbx"
+Files = getFiles "C:\Users\Shiftup\Downloads\eve_anim\*.fbx"
 
 
-for i=1 to 2 do 
+for i=1 to 1 do 
 (
     local file = Files[i]
 	FbxImporterSetParam "Mode" #create 
@@ -239,6 +239,6 @@ for i=1 to 2 do
 	exportFileName = ("C:\Users\Shiftup\Documents\Seq_Export\Game\Art\Character\PC\CH_P_EVE_01\Animation\Editied\\") + (getFileNameFile file) + ".fbx"
 	ExportFile exportFileName #noPrompt using:FBXEXP
 	
-	ResetMaxFile #noPrompt
+	--ResetMaxFile #noPrompt
 )
 

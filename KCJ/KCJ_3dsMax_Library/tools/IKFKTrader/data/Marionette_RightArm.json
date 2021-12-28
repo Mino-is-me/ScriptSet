@@ -1,0 +1,1 @@
+{"ctrlInfo": "R_Arm_IKFKCtrl:172", "ctrlAttr": "IKFK", "IKInfoList": ["R_Arm_IKCtrl:166 ---> R_Arm_3_FKJnt:179", "R_Arm_IKPV_Ctrl:169 ---> R_Arm_2_FKJnt:178"], "FKInfoList": ["R_Arm_1_FKCtrl:155 ---> R_Arm_1_IKJnt:174", "R_Arm_2_FKCtrl:157 ---> R_Arm_2_IKJnt:175", "R_Arm_3_FKCtrl:159 ---> R_Arm_3_IKJnt:176"], "IKValue": 0.0, "FKValue": 100.0}
