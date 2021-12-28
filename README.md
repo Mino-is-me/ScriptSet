@@ -1,5 +1,5 @@
-MaxScript Repo
-Script by Minomi
+DCC Scripts 
+
+MXS / MEL / PY
 
 minomi7029@gmail.com
-https://www.artstation.com/minoming
