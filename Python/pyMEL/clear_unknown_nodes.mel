@@ -1,0 +1,14 @@
+{
+    string $unknownNodes[] = `lsType unknown`;
+    for($node in $unknownNodes){
+        if($node=="<done>")
+            break;
+        if(`objExists $node`)
+        {
+            int $lockState[] = `lockNode -q -l $node`;
+            if($lockState[0]==1)
+            lockNode -l off $node;
+            delete $node;
+        }
+    }
+}
