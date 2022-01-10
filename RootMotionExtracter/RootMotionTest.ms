@@ -109,63 +109,80 @@ for i=1 to ar_COMPos.count do
 
 --COM.parent = World 
 
-Set Animate On 
 cnt1= 0
-for i=AnimationRange.start to AnimationRange.end do 
+with animate on 
 (
-    SliderTime = i 
-	cnt1 = cnt1+1
-	--print sliderTime 
-	frCNT = ( (i as integer) / 160) + 1 
-	--print frCNT 
-    nRoot.pos = ar_COMPos[cnt1]
-	--print ar_COMPos[cnt1]
-    nRoot.pos.z = 0
-	if isBakeRotation do 
+	for i=AnimationRange.start to AnimationRange.end do 
 	(
-		nRoot.rotation.z = ar_reflectedRot[cnt1].z
+		SliderTime = i 
+		cnt1 = cnt1+1
+		--print sliderTime 
+		frCNT = ( (i as integer) / 160) + 1 
+		--print frCNT 
+		nRoot.pos = ar_COMPos[cnt1]
+		--print ar_COMPos[cnt1]
+		nRoot.pos.z = 0
+
+
 	)
-
 )
-Set Animate Off 
+if desiredRotation != 0 then 
+(
+	deleteKeys nRoot.rotation.controller 
 
+	sliderTime = startFrame 
+	addNewKey nRoot.rotation.controller sliderTime
+
+	sliderTime = endFrame 
+	with animate on 
+	(
+		nRoot.rotation = (eulerAngles 0 0 desiredRotation)
+		nRoot.pos =ar_COMPos[EndFrame-startFrame+1]
+	)
+	sliderTime = AnimationRange.start 
+)
+else 
+(
+	with animate on 
+	(
+		sliderTIme = AnimationRange.end 
+		Rotate nRoot euRotateAngle
+	)
+	sliderTIme = AnimationRange.start 
+)
 --
-set Animate on 
-sliderTIme = AnimationRange.end 
-Rotate nRoot euRotateAngle
-set Animate Off 
-sliderTIme = AnimationRange.start 
+
 --
 --COM.parent=COMParent
 
-set Animate on 
-
-biped.createLayer nCOM.controller 1 "RMotionLayer01"
-
-
-
-sliderTime = AnimationRange.End
-sliderTime = AnimationRange.Start
---Biped Layer Bug 안전처리 
-cnt2 = 0
-for i=AnimationRange.start to AnimationRange.end do 
+with animate on 
 (
-	sliderTime = i
-	cnt2=cnt2+1
-	frCNT = ( (i as integer) / 160) + 1 
-	
+	biped.createLayer nCOM.controller 1 "RMotionLayer01"
 
-	biped.setTransform nCOM #pos ar_originPos[cnt2] true 
-	biped.setTransform nCOM #Rotation ar_COMRot[cnt2] true 
 
-	--prop bake
-	if isBakePropKey == true and nprop!=undefined do 
+
+	sliderTime = AnimationRange.End
+	sliderTime = AnimationRange.Start
+	--Biped Layer Bug 안전처리 
+	cnt2 = 0
+	for i=AnimationRange.start to AnimationRange.end do 
 	(
-		nProp.transform = dm_reflectProp.transform
+		sliderTime = i
+		cnt2=cnt2+1
+		frCNT = ( (i as integer) / 160) + 1 
+		
+
+		biped.setTransform nCOM #pos ar_originPos[cnt2] true 
+		biped.setTransform nCOM #Rotation ar_COMRot[cnt2] true 
+
+		--prop bake
+		if isBakePropKey == true and nprop!=undefined do 
+		(
+			nProp.transform = dm_reflectProp.transform
+		)
+		--prop bake end
 	)
-	--prop bake end
 )
-Set animate Off 
 
 
 sliderTime = animationRange.start

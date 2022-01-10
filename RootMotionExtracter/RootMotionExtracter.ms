@@ -62,7 +62,7 @@ Rollout RootMotionMaker "Extract Root Motion"
 		checkBox withRootMotion "Export with Root Motion" across:2
 		checkBox FrontBackOnly "Front and Back Only"
 		checkBox bipAfterBaker "Bake Prop Key" across:2
-		checkBox bakeRotation "Bake Rotation"
+		Button bakeRotation "Make Rotation"
 		--checkBox keepOffset "Keep Offset Between Root and COM" enabled:false
 		/*
 		checkBox ManualRotation "Use Manual Rotation" enabled:false across:2
@@ -98,9 +98,10 @@ Rollout RootMotionMaker "Extract Root Motion"
 	(
 		IdlePos = val 
 	)
-	on bakeRotation Changed val do 
+	on bakeRotation pressed do 
 	(
-		isBakeRotation = val 
+		isBakeRotation = true 
+		filein "Z:\ART_Backup\Script\RootMotionExtracter\makeDesiredRotation.ms"
 	)
 	
 	on withRootMotion changed val do 

@@ -83,4 +83,5 @@ Rollout LocoMocapRotator "Mocap Locomotion Rotator"
 
 	)
 
-)--createDialog LocoMocapRotator
+)
+--createDialog LocoMocapRotator
