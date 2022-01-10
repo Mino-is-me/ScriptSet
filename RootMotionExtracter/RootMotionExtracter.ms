@@ -3,6 +3,7 @@ global isYAxisChecked = false
 global isYawChecked = false 
 global isKeepingDistance = false 
 global isBakePropKey = false 
+global isBakeRotation = false
 global euRotateAngle = (eulerAngles 0 0 0)
 
 Global InitialTransformSetting = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\InitTransforms.ini"
@@ -60,7 +61,8 @@ Rollout RootMotionMaker "Extract Root Motion"
 		--label Warning "*Mino is Fixing this Stuff, Thanks for your excuse*"
 		checkBox withRootMotion "Export with Root Motion" across:2
 		checkBox FrontBackOnly "Front and Back Only"
-		checkBox bipAfterBaker "Bake Prop Key"
+		checkBox bipAfterBaker "Bake Prop Key" across:2
+		checkBox bakeRotation "Bake Rotation"
 		--checkBox keepOffset "Keep Offset Between Root and COM" enabled:false
 		/*
 		checkBox ManualRotation "Use Manual Rotation" enabled:false across:2
@@ -95,6 +97,10 @@ Rollout RootMotionMaker "Extract Root Motion"
 	on TimingSlider Changed val do 
 	(
 		IdlePos = val 
+	)
+	on bakeRotation Changed val do 
+	(
+		isBakeRotation = val 
 	)
 	
 	on withRootMotion changed val do 

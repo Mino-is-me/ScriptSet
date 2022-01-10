@@ -121,6 +121,10 @@ for i=AnimationRange.start to AnimationRange.end do
     nRoot.pos = ar_COMPos[cnt1]
 	--print ar_COMPos[cnt1]
     nRoot.pos.z = 0
+	if isBakeRotation do 
+	(
+		nRoot.rotation.z = ar_reflectedRot[cnt1].z
+	)
 
 )
 Set Animate Off 
