@@ -126,20 +126,23 @@ with animate on
 
 	)
 )
-if desiredRotation != 0 then 
+if desiredRotation != undefined then 
 (
-	deleteKeys nRoot.rotation.controller 
-
-	sliderTime = startFrame 
-	addNewKey nRoot.rotation.controller sliderTime
-
-	sliderTime = endFrame 
-	with animate on 
+	if desiredRotation != 0 do 
 	(
-		nRoot.rotation = (eulerAngles 0 0 desiredRotation)
-		nRoot.pos =ar_COMPos[EndFrame-startFrame+1]
+		deleteKeys nRoot.rotation.controller 
+
+		sliderTime = startFrame 
+		addNewKey nRoot.rotation.controller sliderTime
+
+		sliderTime = endFrame 
+		with animate on 
+		(
+			nRoot.rotation = (eulerAngles 0 0 desiredRotation)
+			nRoot.pos =ar_COMPos[EndFrame-startFrame+1]
+		)
+		sliderTime = AnimationRange.start 
 	)
-	sliderTime = AnimationRange.start 
 )
 else 
 (
