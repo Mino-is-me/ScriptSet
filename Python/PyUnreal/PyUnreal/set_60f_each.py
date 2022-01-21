@@ -11,6 +11,5 @@ for each in ar_asset_lists :
     frame_rate_data = import_data_selected.get_editor_property("custom_sample_rate")
     using_default_sample_rate = import_data_selected.get_editor_property("use_default_sample_rate")
     
-    if using_default_sample_rate : 
-        import_data_selected.set_editor_property("use_default_sample_rate", False)
-        import_data_selected.set_editor_property("custom_sample_rate", 60)
+    import_data_selected.set_editor_property("use_default_sample_rate", False)
+    import_data_selected.set_editor_property("custom_sample_rate", 60)
