@@ -434,7 +434,7 @@ fn selectBeforeExport =
 				)
 				2 : -- when Export Bones Only 
 				(
-					--Try ( selectMore $SC_WeaponConstraint ) catch()
+					Try ( selectMore $SC_WeaponConstraint ) catch()
 					if facialSetting == 2 do -- Export facialNodes Only 
 					(							
 						deselect $* 
@@ -1088,12 +1088,13 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 
 rollout awesomeTools "Awesome Tools!(BETA)"
 (
-	button btn_ctrlGlue "Controller Glue" across:6
+	button btn_ctrlGlue "Controller Glue" across:4
 	button btn_somi "SOMI"
 	button btn_backupFolder "BackUpFolder"
 	button btn_FaceMerger "FaceMerger"
-	button btn_bakeCam "CameraBaker"
+	button btn_bakeCam "CameraBaker" across:4
 	button btn_skinTheif "SkinTheif"
+	button btn_scaleMaster "Scene Scaling"
 	on btn_ctrlGlue pressed do 
 	(
 		filein (projectDir + "ControllerGlue\\ControllerGlue.ms")
@@ -1122,6 +1123,10 @@ rollout awesomeTools "Awesome Tools!(BETA)"
 	on btn_skinTheif pressed do 
 	(
 		filein (projectDir + "SkinThief\\SkinTheif.ms")
+	)
+	on btn_scaleMaster pressed do 
+	(
+		filein (projectDir + "ScaleMaster\\scaleMaster.ms")
 	)
 )
 
