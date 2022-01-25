@@ -447,7 +447,6 @@ fn selectBeforeExport =
 						Deselect $DM_L_Breast
 						Deselect $Ab_L_Breast_Link
 						Deselect $Ab_L_Breast
-
 						Deselect $DM_R_Breast_Point
 						Deselect $DM_R_Breast
 						Deselect $Ab_R_Breast_Link
@@ -526,6 +525,10 @@ fn selectBeforeExport =
 					if hasXtraProp == true do 
 					(
 						selectMore $'Bip001 Prop2'
+					)
+					if (isValidNode $SC_LinkTarget) == true do
+					(
+						selectMore $'SC_LinkTarget'
 					)
 
 				)
