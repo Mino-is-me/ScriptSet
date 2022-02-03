@@ -24,7 +24,6 @@ Global eveLogoBMP = "//10.220.70.12/eve/ART_Backup/Script/Logo/eveLogo.bmp" -- g
 Global underConstructionPNG = "//10.220.70.12/eve/ART_Backup/Script/Logo/underConstruction.png"
 Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" ) -- get UserOWN Exporter setting ini
 
-
 Global exportWithMorph = false 
 Global exportWithRootMotion = false
 
@@ -676,6 +675,7 @@ fn ExtractFile = --code Wrap
 		/*BackUp File*/ 
 		exportFile exportFileName #noPrompt selectedOnly:True using:FBXEXPORTER
 		fileName = getFilenameFile exportFileName 
+		--setclipboardText "\n"exportFileName
 		return exportFileName
 	)
 	else
@@ -970,7 +970,6 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 
 				fileName = ExtractFile()
 
-
 				if exportWithMorph do (max undo)
 
 
@@ -1037,7 +1036,7 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 			selectBeforeExport()
 			
 			fileName = ExtractFile()
-			print fileName
+			setclipboardText fileName
 			if exportWithMorph do (max undo)
 			--max undo
 			--logDir = makeExportogDir()
