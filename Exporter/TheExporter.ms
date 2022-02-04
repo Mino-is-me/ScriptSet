@@ -426,8 +426,8 @@ fn selectBeforeExport =
 					Try ( selectMore $SC_WeaponConstraint ) catch()
 
 					selectmore $'Ab TL HairB09'
-					selectmore $'Ab TL hairC11'
-					selectmore $'Ab Tl HairA10'
+					--selectmore $'Ab TL hairC11'
+					--selectmore $'Ab Tl HairA10'
 					
 					format "select Bones and Mesh PC[EVE]\n"
 				)
