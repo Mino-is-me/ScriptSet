@@ -50,15 +50,24 @@ def set_blendSample_to_bs (__blendspace, __blendsample) : #returns [BlendSpace] 
 
 
 def get_bp_c_by_name(__bp_dir:str):
-    __bp_c = __bp_dir + '_c' 
+    __bp_c = __bp_dir + '_C' 
     return __bp_c 
 
-def get_bp_mesh_comp_by_name (__bp_c:str, __seek_comp_name:str) :
-    #source_mesh = ue.load_asset(__mesh_dir)
+def get_bp_mesh_comp_by_name (__bp_c:str, __seek_comp_name:str) : 
     loaded_bp_c = unreal.EditorAssetLibrary.load_blueprint_class(__bp_c)
     bp_c_obj = unreal.get_default_object(loaded_bp_c)
     loaded_comp = bp_c_obj.get_editor_property(__seek_comp_name)
     return loaded_comp
+    #인풋으로 받는 __bp_c 아규먼트 '/direc/*_Bluperint.*_Blueprint_c' << 와 같은 포맷으로 받아야함
+    #__seek_comp_name 아규먼트 동작 안하면 아래의 함수를 사용하세요.
+
+
+def get_bp_instance (__bp_c:str) :
+    loaded_bp_c = unreal.EditorAssetLibrary.load_blueprint_class(__bp_c)
+    bp_c_obj = unreal.get_default_object(loaded_bp_c)
+    return bp_c_obj
+    #Object화된 Blueprint instance를 반환
+    #컴포넌트는 반환된 bp_c_obj.get_editor_property('찾고자 하는 컴포넌트 이름')으로 끌어다 쓰세요.
 
 # BP 컴포넌트 접근 순서
 ## 블루프린트 클래스 로드
