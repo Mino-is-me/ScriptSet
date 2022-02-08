@@ -27,12 +27,15 @@ def get_anim_list (__path: str) -> list :
 
 
 def check_animseq_by_name_in_list (__anim_name: str, __list: list ) -> str :
-    for each in __list :
-        name = each.rsplit('.', 1)[1]
-        found_name = name.find(__anim_name)
-        if found_name != -1 :
-            break 
-    return each
+    if len(__list) > 0 :
+        for each in __list :
+            name = each.rsplit('.', 1)[1]
+            found_name = name.find(__anim_name)
+            if found_name != -1 :
+                break 
+        return each
+    else :
+        return ''
 
 
 def set_bs_sample (__animation, __axis_x: float, __axis_y: float) : # returns [BlendSample] unreal native type 
@@ -109,6 +112,8 @@ bs_path = wraped.main_dir + wraped.bs_dir
 
 anim_list = get_anim_list(seek_anim_path)
 name_list : list = []
+
+
 for each in wraped.seq_names :
     anim_name = check_animseq_by_name_in_list(each, anim_list)
     name_list.append(anim_name)
@@ -134,7 +139,7 @@ bs_sample_for_lock_on = [
 ]
 
 bs_param_idle = set_blendParameter(0.0, 100.0)
-bs_param_lockon = set_blendParameter(-1.0, 1.0)
+bs_param_lock_on = set_blendParameter(-1.0, 1.0)
 
 bs_idle_peaceful = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[0] )
 bs_idle_battle = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[1] )
@@ -149,6 +154,6 @@ set_square_blendSpace( bs_idle_battle, bs_param_idle)
 set_square_blendSpace( bs_idle_down, bs_param_idle)
 set_square_blendSpace( bs_idle_groggy, bs_param_idle)
 set_square_blendSpace( bs_idle_airborne, bs_param_idle)
-set_square_blendSpace( bs_idle_lockon, bs_param_lockon)
+set_square_blendSpace( bs_idle_lockon, bs_param_lock_on)
 
 #######################################run end here#######################################

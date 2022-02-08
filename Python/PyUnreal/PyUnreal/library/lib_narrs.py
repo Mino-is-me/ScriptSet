@@ -1,3 +1,7 @@
+#Discription
+##Python 3.7 with UE4.26 Python Module by Minomi
+###함수 사용시 import 방식이 아닌 복사해서 사용하는게 더 정신건강에 이롭습니다.
+
 
 #######################################import modules from here#######################################
 import unreal 
