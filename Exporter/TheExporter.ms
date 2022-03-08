@@ -278,31 +278,38 @@ fn getSkinBone obj =
 
 fn isRootNodeisRoot =
 (
+	local bCOMisValid = isValidNode $Bip001
 	local bRootisValid = isValidNode $Root 
-
-	if bRootisValid == true then 
+	if bCOMisValid then 
 	(
-		if( $Bip001.parent == $Root ) then
+		if bRootisValid == true then 
 		(
-			isRoot = True
+			if( $Bip001.parent == $Root ) then
+			(
+				isRoot = True
+			)
+			else 
+			(
+				isRoot = false
+				$Bip001.parent = $Root 
+			)
 		)
 		else 
 		(
-			isRoot = false
-			$Bip001.parent = $Root 
+			local bnRootNode = boneSys.createBone [ 0, 0, 0 ] [ 20, 0, 0 ] [ 0, 0, 1 ] -- Root를 +X를 Front로 놓고 생성 
+			bnRootNode.name = "Root"
+			$Bip001.parent = bnRootNode 
+			bnRootNode.sidefins = true 
+			bnRootNode.backfin = false 
+			bnRootNode.frontfin = false 
+			bnRootNode.sidefinssize = 4.0
+
+			print "Root Node Created"
 		)
 	)
-	else 
+	else
 	(
-		local bnRootNode = boneSys.createBone [ 0, 0, 0 ] [ 20, 0, 0 ] [ 0, 0, 1 ] -- Root를 +X를 Front로 놓고 생성 
-		bnRootNode.name = "Root"
-		$Bip001.parent = bnRootNode 
-		bnRootNode.sidefins = true 
-		bnRootNode.backfin = false 
-		bnRootNode.frontfin = false 
-		bnRootNode.sidefinssize = 4.0
-
-		print "Root Node Created"
+		isRoot = false 
 	)
 
 	Return isRoot 
@@ -914,6 +921,8 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 				loadMaxFile i quiet:true
 				units.systemScale = 1
 
+				isRootNodeisRoot()
+
 				if exportWithRootMotion == true do 
 				(
 					if RootMotionMaker.Species.Selection == 1 then 
@@ -989,6 +998,8 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 		(
 
 			units.SystemScale = 1
+
+			isRootNodeisRoot()
 
 			if exportWithRootMotion == true do 
 			(
