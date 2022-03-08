@@ -42,8 +42,6 @@ for i=AnimationRange.start to AnimationRange.end do
 
 	newVec = dm_reflectCOM.pos 
 
- 
-	
 	comVec = biped.getTransform $Bip001 #Pos
 	
 
@@ -57,21 +55,21 @@ sliderTime = AnimationRange.start
 
 $Bip001.parent = World 
 
-Set animate On 
-cnt1= 0
-for i=AnimationRange.start to AnimationRange.end do 
+with animate on 
 (
-    SliderTime = i 
-	cnt1 = cnt1+1
-	frCNT = ( (i as integer) / 160) + 1 
-	if ar_COMPos[cnt1].z < 0 do
+	cnt1= 0
+	for i=AnimationRange.start to AnimationRange.end do 
 	(
-		ar_COMPOS[cnt1].z = 0.0
+		SliderTime = i 
+		cnt1 = cnt1+1
+		frCNT = ( (i as integer) / 160) + 1 
+		if ar_COMPos[cnt1].z < 0 do
+		(
+			ar_COMPOS[cnt1].z = 0.0
+		)
+		$Root.pos = ar_COMPos[cnt1]
 	)
-    $Root.pos = ar_COMPos[cnt1]
-
 )
-Set animate Off 
 
 --
 set animate on 
@@ -81,49 +79,29 @@ sliderTIme = AnimationRange.start
 --
 $Bip001.parent=$Root
 
-set animate on 
-
-biped.createLayer $Bip001.controller 1 "RMotionLayer01"
-
-sliderTime = AnimationRange.End
-sliderTime = AnimationRange.Start
---Biped Layer Bug 안전처리 
-cnt2 = 0
-for i=AnimationRange.start to AnimationRange.end do 
+with animate on 
 (
-	sliderTime = i
-	cnt2=cnt2+1
-	frCNT = ( (i as integer) / 160) + 1 
-	
-	biped.setTransform $Bip001 #pos ar_originPos[cnt2] true 
-	--biped.setTransform $Bip001 #Rotation ar_COMRot[cnt2] true 
+	biped.createLayer $Bip001.controller 1 "RMotionLayer01"
 
+	sliderTime = AnimationRange.End
+	sliderTime = AnimationRange.Start
+	--Biped Layer Bug 안전처리 
+	cnt2 = 0
+	for i=AnimationRange.start to AnimationRange.end do 
+	(
+		sliderTime = i
+		cnt2=cnt2+1
+		frCNT = ( (i as integer) / 160) + 1 
+		
+		biped.setTransform $Bip001 #pos ar_originPos[cnt2] true 
+		--biped.setTransform $Bip001 #Rotation ar_COMRot[cnt2] true 
+
+	)
 )
-Set Animate Off 
 
 SliderTime = AnimationRange.start 
 
 Biped.collapseAtLayer $Bip001.controller 0
-
---deleteKeys $Root.controller
-
---DeleteKeys $Root.rotation.controller.Z_Rotation.controller #allKeys
-
-
-/*
-ar_TargetTMs = #()
-
-
-cnt3 = 0
-for i=AnimationRange.start to AnimationRange.end do 
-(
-	sliderTime = i
-	cnt3=cnt3+1
-	frCNT = ( (i as integer) / 160) + 1 
-	append ar_TargetTMs $Root.transform
-
-)
-*/
 
 
 
