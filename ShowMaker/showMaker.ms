@@ -1,6 +1,8 @@
 
 
-*/ --Merged ShowMaker Script by Minomi 2021.03.05
+ --Merged ShowMaker Script by Minomi 2021.03.05
+
+global pbtn_controller_name = ""
 
 Fn fn_getMultipleFiles =
 (
@@ -60,6 +62,7 @@ rollout showMaker "Show Maker" width:200 height:350
     on pbtn_controller picked obj do
     (
         pbtn_controller.text = obj.name
+        pbtn_controller_name = obj.name 
     )
 
     on btn_target pressed do 
@@ -81,94 +84,61 @@ rollout showMaker "Show Maker" width:200 height:350
     (
 
         resetMaxFile #noPrompt 
-
-
-        loadMaxFile  showMaker.edt_target.text quiet:true
-        
         if not (showMaker.chk_useCustomRootMotion.checked) then (
+            loadMaxFile  showMaker.edt_target.text quiet:true
             filein "Z:\\ART_Backup\\Script\\ShowMaker\\FullRootMotion.ms"
+            saveMaxFile ((showMaker.edt_exportPath.text) + ("\\LinkTarget.max") ) quiet:true
+
+            resetMaxFile #noPrompt 
+    
+    
+            loadMaxFile showMaker.edt_caster.text quiet:true 
+    
+            thecopypastedir = getdir #autoback -- CHANGE THIS TO ANY FOLDER YOU WANT
+            thecopypastefile = "\pastefile.max" --this is the filename to save as...
+            thecopypastestring = thecopypastedir + thecopypastefile --this is the complete string
+        
+            mergemaxfile (thecopypastedir + thecopypastefile) #select #autoRenameDups quiet:true --this merges ("pastes") and selects objects from file
+    
+            
+            linkRoot = Dummy()
+            $Root001.parent = linkRoot
+            
+            linkRoot.rotation = quat 0 0 1 0
+    
+    
+            if not (isValidNode $SC_LinkTarget) do 
+            (
+                --delete $SC_LinkTarget
+                sc_LinkTarget = dummy()
+                sc_LinkTarget.parent = $Root
+                sc_LinkTarget.transform = (matrix3 [1,0,0] [0,1,-1.19209e-07] [0,1.19209e-07,1] [0,0,0])
+                sc_LinkTarget.name = "SC_LinkTarget"
+            )
+    
+    
+            cnt=0
+            with Animate on 
+            (
+                for i=AnimationRange.start to AnimationRange.end do 
+                (
+                    cnt = cnt+1
+                    SliderTime = i 
+                    $sc_LinkTarget.transform = $Root001.transform 
+                )
+            )
+    
+            delete $Root001
+            delete linkRoot
+    
+            saveMaxFile ( (showMaker.edt_exportPath.text) + ("\\LinkCaster.max") ) quiet:true
         )
-        else (
+        else (     
             filein "Z:\\ART_Backup\\Script\\ShowMaker\\customRootMotion.ms"
         )
 
-        saveMaxFile ((showMaker.edt_exportPath.text) + ("\\LinkTarget.max") ) quiet:true
-
-        resetMaxFile #noPrompt 
-
-
-        loadMaxFile showMaker.edt_caster.text quiet:true 
-
-        thecopypastedir = getdir #autoback -- CHANGE THIS TO ANY FOLDER YOU WANT
-        thecopypastefile = "\pastefile.max" --this is the filename to save as...
-        thecopypastestring = thecopypastedir + thecopypastefile --this is the complete string
-    
-        mergemaxfile (thecopypastedir + thecopypastefile) #select #autoRenameDups quiet:true --this merges ("pastes") and selects objects from file
-
-		
-		linkRoot = Dummy()
-		$Root001.parent = linkRoot
-		
-		linkRoot.rotation = quat 0 0 1 0
-
-
-        if not (isValidNode $SC_LinkTarget) do 
-        (
-            --delete $SC_LinkTarget
-            sc_LinkTarget = dummy()
-            sc_LinkTarget.parent = $Root
-            sc_LinkTarget.transform = (matrix3 [1,0,0] [0,1,-1.19209e-07] [0,1.19209e-07,1] [0,0,0])
-            sc_LinkTarget.name = "SC_LinkTarget"
-        )
-
-
-        cnt=0
-        with Animate on 
-        (
-            for i=AnimationRange.start to AnimationRange.end do 
-            (
-                cnt = cnt+1
-				SliderTime = i 
-				$sc_LinkTarget.transform = $Root001.transform 
-            )
-        )
-
-        delete $Root001
-        delete linkRoot
-
-        saveMaxFile ( (showMaker.edt_exportPath.text) + ("\\LinkCaster.max") ) quiet:true
     )
 
 )
 
 CreateDialog showMaker
-
-
-/*
-ar_TargetTMs = #()
-
-cnt=0
-for i=AnimationRange.start to AnimationRange.end do 
-(
-	cnt = cnt+1
-	sliderTime = i 
-	
-	append ar_TargetTMs $Root.Transform
-	
-)
-
-with Animate on 
-(
-	for i=AnimationRange.start to AnimationRange.end do 
-	(
-		SliderTime = i 
-		cnt = cnt+1
-		if cnt <= ar_TargetTMs.count do
-		(
-			sc_LinkTarget.transform = ar_TargetTMs[cnt]
-			--sc_LinkTarget.pos.y = sc_LinkTarget.pos.y
-		)
-	)
-)
-
-*/

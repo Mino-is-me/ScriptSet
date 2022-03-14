@@ -280,18 +280,21 @@ fn isRootNodeisRoot =
 (
 	local bCOMisValid = isValidNode $Bip001
 	local bRootisValid = isValidNode $Root 
+	local bBaseisValid = isValidNode $Base
 	if bCOMisValid then 
 	(
-		if bRootisValid == true then 
+		if bRootisValid then 
 		(
-			if( $Bip001.parent == $Root ) then
+			if( $Bip001.parent == $Root OR $Bip001.parent == $Base ) then
 			(
 				isRoot = True
 			)
 			else 
 			(
 				isRoot = false
-				$Bip001.parent = $Root 
+				if bBaseisValid then ( $Bip001.parent = $Base )
+				else ( $Bip001.parent = $Root )
+				
 			)
 		)
 		else 
@@ -1047,7 +1050,7 @@ rollout 'Exporter' "Exporter 2.0" width:505 height:723
 			selectBeforeExport()
 			
 			fileName = ExtractFile()
-			setclipboardText fileName
+			--setclipboardText fileName
 			if exportWithMorph do (max undo)
 			--max undo
 			--logDir = makeExportogDir()
