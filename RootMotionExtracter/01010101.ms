@@ -7,9 +7,9 @@ rt = pymxs.runtime
 # ============================================
 # inputs
 # ============================================
-target_node = 'RightAx_Base_Ctrl'
-cur_startFrame = 0
-cur_endFrame = 143
+target_node = 'LeftAx_Base_Ctrl'
+cur_startFrame = 12
+cur_endFrame = 182
 
 
 # ============================================
