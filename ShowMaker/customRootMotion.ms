@@ -47,32 +47,131 @@ for i=animationRange.start to animationRange.end do (
 sliderTime = animationRange.start
 
 cnt = 1
+xpose = dummy()
 with animate on (
     for i=animationRange.start to animationRange.end do (
         sliderTime = i 
         
 		if ar_tm_linkTarget[cnt] != undefiend then (
-            $Root.transform = ar_tm_linkTarget[cnt]
+            xpose.transform = ar_tm_linkTarget[cnt]
             cnt += 1
         )
         else ( break )
     )
 )
 sliderTime = animationRange.start
+ar_COMPos = #()
+ar_RootPos= #()
+ar_originPos = #() 
 
-cnt = 1
-biped.createLayer $Bip001.controller 1 "RMotionLayer01"
+distanceFromRoot = [0,0,0]
+cnt = 0 
+
+dm_reflectCOM = Dummy() 
+dm_RotationCOM = Dummy() 
+--dm_reflectProp = Dummy()
+
+AnimStart = AnimationRange.start as integer / 160 
+AnimEnd = AnimationRange.end as integer / 160
+
+
+FrameCount = AnimEnd-AnimStart + 1
+
+sliderTime = AnimationRange.Start 
+
+-------------------Position Controller-----------------------
+dm_reflectCOM.position.controller = Position_Constraint()
+if isValidNode $Bip002 and not isValidNode $Bip001 then 
+(
+	for i in $Bip002* do
+	(
+		i.name = substituteString i.name "Bip002" "Bip001"
+	)
+)
+dm_reflectCOM.position.controller.appendTarget $Bip001 50.0 
+dm_reflectCOM.position.controller.relative = on 
+	
+if isValidNode $Root001 and not isValidNode $Root do
+(
+	$Root001.name = "Root"
+)
+
+for i=AnimationRange.start to AnimationRange.end do 
+(
+    sliderTime = i
+	cnt = cnt + 1
+
+
+	newVec = dm_reflectCOM.pos 
+
+	comVec = biped.getTransform $Bip001 #Pos
+	
+
+    append ar_COMPos newVec -- reflected COM Pos 
+
+    append ar_originPos comVec -- COM Pos 
+
+) 
+
+sliderTime = AnimationRange.start
+
+$Bip001.parent = World 
+
+with animate on 
+(
+	cnt1= 0
+	for i=AnimationRange.start to AnimationRange.end do 
+	(
+		SliderTime = i 
+		cnt1 = cnt1+1
+		frCNT = ( (i as integer) / 160) + 1 
+		if ar_COMPos[cnt1].z < 0 do
+		(
+			ar_COMPOS[cnt1].z = 0.0
+		)
+		$Root.pos = ar_COMPos[cnt1]
+	)
+)
+
+--
+set animate on 
+sliderTIme = AnimationRange.end 
+set animate Off 
+sliderTIme = AnimationRange.start 
+--
+$Bip001.parent=$Root
+
+with animate on 
+(
+	biped.createLayer $Bip001.controller 1 "RMotionLayer01"
+
+	sliderTime = AnimationRange.End
+	sliderTime = AnimationRange.Start
+	--Biped Layer Bug ???? 
+	cnt2 = 0
+	for i=AnimationRange.start to AnimationRange.end do 
+	(
+		sliderTime = i
+		cnt2=cnt2+1
+		frCNT = ( (i as integer) / 160) + 1 
+		
+		biped.setTransform $Bip001 #pos ar_originPos[cnt2] true 
+		--biped.setTransform $Bip001 #Rotation ar_COMRot[cnt2] true 
+
+	)
+)
+
+SliderTime = AnimationRange.start 
+
+Biped.collapseAtLayer $Bip001.controller 0
+
 with animate on (
     for i=animationRange.start to animationRange.end do (
         sliderTime = i 
-        $Bip001.transform = ar_comTM[cnt]
-        cnt += 1
+		
+		$Root.transform = xpose.transform
     )
 )
-sliderTime = animationRange.start
-
-
-Biped.collapseAtLayer $Bip001.controller 0
 
 saveMaxFile (
 (showMaker.edt_exportPath.text) + ("\\LinkTarget.max") 
@@ -80,4 +179,3 @@ saveMaxFile (
 
 
 --free ar_tm_linkTarget
-free pbtn_controller_name
