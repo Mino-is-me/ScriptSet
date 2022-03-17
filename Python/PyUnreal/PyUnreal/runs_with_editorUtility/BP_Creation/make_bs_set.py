@@ -22,7 +22,7 @@ def get_selected_asset_dir() -> str :
 
 
 def get_anim_list (__path: str) -> list :
-    seq_list = unreal.EditorAssetLibrary.list_assets(__path, True, False)
+    seq_list = unreal.EditorAssetLibrary.list_assets(__path, False, False)
     return seq_list
 
 
@@ -36,6 +36,7 @@ def check_animseq_by_name_in_list (__anim_name: str, __list: list ) -> str :
         return each
     else :
         return ''
+#공백 문자열을 리턴하지 못하는 이슈가 있어와요 << 체크 
 
 
 def set_bs_sample (__animation, __axis_x: float, __axis_y: float) : # returns [BlendSample] unreal native type 
@@ -162,4 +163,11 @@ set_square_blendSpace( bs_idle_groggy,      bs_param_idle)
 set_square_blendSpace( bs_idle_airborne,    bs_param_idle)
 set_square_blendSpace( bs_idle_lockon,      bs_param_lock_on)
 
+
+set_blendSample_to_bs( bs_idle_peaceful,    bs_sample_for_idle_peace)
+set_blendSample_to_bs( bs_idle_battle,      bs_sample_for_idle_battle)
+set_blendSample_to_bs( bs_idle_down,        bs_sample_for_down)
+set_blendSample_to_bs( bs_idle_groggy,      bs_sample_for_groggy)
+set_blendSample_to_bs( bs_idle_airborne,    bs_sample_for_airborne)
+set_blendSample_to_bs( bs_idle_lockon,      bs_sample_for_lock_on)
 #######################################run end here#######################################
