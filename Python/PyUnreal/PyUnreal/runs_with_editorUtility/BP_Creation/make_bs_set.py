@@ -115,7 +115,7 @@ name_list : list = []
 
 
 for each in wraped.seq_names :
-    anim_name = check_animseq_by_name_in_list(each, anim_list)
+    anim_name = check_animseq_by_name_in_list( ( wraped.pre_fix + each ) , anim_list)
     name_list.append(anim_name)
     print(anim_name)
 
@@ -125,12 +125,18 @@ for each in name_list :
     found_list.append(loaded_seq)
 
 
-bs_sample_for_idle_peace = [set_bs_sample(found_list[0], 0.0, 0.0), set_bs_sample(found_list[1], 100.0, 0.0)]
-bs_sample_for_idle_battle = [set_bs_sample(found_list[2], 0.0, 0.0), set_bs_sample(found_list[3], 0.0, 0.0)]
-bs_sample_for_down = [set_bs_sample(found_list[4], 0.0, 0.0)]
-bs_sample_for_groggy = [set_bs_sample(found_list[5], 0.0, 0.0)]
-bs_sample_for_airborne = [set_bs_sample(found_list[6], 0.0, 0.0)]
-bs_sample_for_lock_on = [
+bs_sample_for_idle_peace    = [
+    set_bs_sample(found_list[0], 0.0, 0.0), 
+    set_bs_sample(found_list[1], 100.0, 0.0)
+]
+bs_sample_for_idle_battle   = [
+    set_bs_sample(found_list[2], 0.0, 0.0), 
+    set_bs_sample(found_list[3], 0.0, 0.0)
+]
+bs_sample_for_down          = [set_bs_sample(found_list[4], 0.0, 0.0)]
+bs_sample_for_groggy        = [set_bs_sample(found_list[5], 0.0, 0.0)]
+bs_sample_for_airborne      = [set_bs_sample(found_list[6], 0.0, 0.0)]
+bs_sample_for_lock_on       = [
     set_bs_sample(found_list[7], 0.0, 0.0), 
     set_bs_sample(found_list[8], 0.0, 1.0), 
     set_bs_sample(found_list[9], 0.0, -1.0), 
@@ -138,22 +144,22 @@ bs_sample_for_lock_on = [
     set_bs_sample(found_list[11], -1.0, 0.0)
 ]
 
-bs_param_idle = set_blendParameter(0.0, 100.0)
-bs_param_lock_on = set_blendParameter(-1.0, 1.0)
+bs_param_idle       = set_blendParameter(0.0, 100.0)
+bs_param_lock_on    = set_blendParameter(-1.0, 1.0)
 
-bs_idle_peaceful = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[0] )
-bs_idle_battle = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[1] )
-bs_idle_down = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[2] )
-bs_idle_groggy = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[3] )
-bs_idle_airborne = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[4] )
-bs_idle_lockon = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[5] )
+bs_idle_peaceful    = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[0] )
+bs_idle_battle      = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[1] )
+bs_idle_down        = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[2] )
+bs_idle_groggy      = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[3] )
+bs_idle_airborne    = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[4] )
+bs_idle_lockon      = unreal.EditorAssetLibrary.load_asset ( bs_path + '/' + wraped.bs_names[5] )
 
 
-set_square_blendSpace( bs_idle_peaceful, bs_param_idle)
-set_square_blendSpace( bs_idle_battle, bs_param_idle)
-set_square_blendSpace( bs_idle_down, bs_param_idle)
-set_square_blendSpace( bs_idle_groggy, bs_param_idle)
-set_square_blendSpace( bs_idle_airborne, bs_param_idle)
-set_square_blendSpace( bs_idle_lockon, bs_param_lock_on)
+set_square_blendSpace( bs_idle_peaceful,    bs_param_idle)
+set_square_blendSpace( bs_idle_battle,      bs_param_idle)
+set_square_blendSpace( bs_idle_down,        bs_param_idle)
+set_square_blendSpace( bs_idle_groggy,      bs_param_idle)
+set_square_blendSpace( bs_idle_airborne,    bs_param_idle)
+set_square_blendSpace( bs_idle_lockon,      bs_param_lock_on)
 
 #######################################run end here#######################################

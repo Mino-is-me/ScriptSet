@@ -87,8 +87,8 @@ bp_mesh_comp.set_editor_property('anim_class', loaded_abp)
 
 
 #test code #
-bp_capsule_comp = get_bp_capsule_comp(_bp_c)
+# bp_capsule_comp = get_bp_capsule_comp(_bp_c)
 
-bp_capsule_comp = get_bp_comp_by_name(_bp_c,'CapsuleComponent')
+# bp_capsule_comp = get_bp_comp_by_name(_bp_c,'CapsuleComponent')
 
-half_height = bp_capsule_comp.get_editor_property('capsule_half_height')
+# half_height = bp_capsule_comp.get_editor_property('capsule_half_height')
