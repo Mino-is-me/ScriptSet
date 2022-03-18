@@ -1,8 +1,8 @@
 import unreal
 
 
-# src_num = '_02' 
-# dst_num = '_46'
+# src_num = # Binded value from Widget UI
+# dst_num = # Binded value from Widget UI
 
 ar_asset_lists = unreal.EditorUtilityLibrary.get_selected_assets() 
 
@@ -14,5 +14,7 @@ if len(ar_asset_lists) > 0 :
         rename = unreal.EditorAssetLibrary.rename_asset(src_asset_path, dst_asset_path)
 
 
-
-
+#Memory Free here 
+del ar_asset_lists
+del src_num
+del dst_num

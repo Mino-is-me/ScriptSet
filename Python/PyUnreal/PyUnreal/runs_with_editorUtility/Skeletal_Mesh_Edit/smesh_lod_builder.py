@@ -1,4 +1,6 @@
+import gc
 import unreal 
+import sys
 
 _num_lod : int  = int(__lo_d_level)  # Binded value from Widget UI
 selected : list = unreal.EditorUtilityLibrary.get_selected_assets() #get selected assets using editorUtilityLib
@@ -11,3 +13,8 @@ def skeletal_mesh_lod_builder ( __num_lod : int, __asssets : list ) -> bool :
 
 
 skeletal_mesh_lod_builder( _num_lod, selected )
+
+
+#Memory Free here 
+del selected 
+del _num_lod
