@@ -55,6 +55,20 @@ for each in bsNames:
 
 Skeleton = ar_asset_lists[0].skeleton
 
+#ABP Skeleton Set
 asset_bp = unreal.EditorAssetLibrary.duplicate_asset(BaseBP,BPPath)
 AnimBP = unreal.EditorAssetLibrary.duplicate_asset(BaseAnimBP,AnimBPPath)
 AnimBP.set_editor_property("target_skeleton", Skeleton)
+
+#BP Component Set
+_bp_    = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(asset_bp)
+_abp_   = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(AnimBP)
+
+_bp_c  = get_bp_c_by_name(_bp_) 
+_abp_c = get_bp_c_by_name(_abp_)
+
+loaded_abp   = unreal.EditorAssetLibrary.load_blueprint_class(_abp_c)
+bp_mesh_comp = get_bp_mesh_comp(_bp_c)
+
+bp_mesh_comp.set_editor_property('skeletal_mesh',ar_asset_lists[0])
+bp_mesh_comp.set_editor_property('anim_class', loaded_abp)
