@@ -1,6 +1,6 @@
 import unreal 
 
-_num_lod : int = 3  #default -> create 3 LODs 
+_num_lod : int  = int(__lo_d_level)  # Binded value from Widget UI
 selected : list = unreal.EditorUtilityLibrary.get_selected_assets() #get selected assets using editorUtilityLib
 
 def skeletal_mesh_lod_builder ( __num_lod : int, __asssets : list ) -> bool :  

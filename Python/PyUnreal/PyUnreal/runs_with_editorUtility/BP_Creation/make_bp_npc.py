@@ -46,15 +46,15 @@ if len(ar_asset_lists) > 0 :
     name = name.rsplit('.', 1)[1]
 
 
-BaseBP = '/Game/Art/Character/NPC/CH_NPC_Core/Blueprints/CH_NPC_Core_Blueprint'
-BaseAnimBP = '/Game/Art/Character/NPC/CH_NPC_Core/Blueprints/CH_NPC_Core_AnimBP'
+BaseBP: str      = '/Game/Art/Character/NPC/CH_NPC_Core/Blueprints/CH_NPC_Core_Blueprint'
+BaseAnimBP: str  = '/Game/Art/Character/NPC/CH_NPC_Core/Blueprints/CH_NPC_Core_AnimBP'
 
-Basepath = path
-assetPath = Basepath + '/Animation/BlendSpace/' 
+Basepath: str    = path
+assetPath: str   = Basepath + '/Animation/BlendSpace/' 
 '''BP setting start'''
 
-BPPath = Basepath + '/Blueprints/' + name + "_Blueprint"
-AnimBPPath = Basepath + '/Blueprints/' + name + "_AnimBP"
+BPPath: str     = Basepath + '/Blueprints/' + name + "_Blueprint"
+AnimBPPath: str = Basepath + '/Blueprints/' + name + "_AnimBP"
 
 #SkeletonPath = Basepath + name + "_Skeleton"
 Skeleton = ar_asset_lists[0].skeleton
@@ -71,13 +71,13 @@ AnimBP.set_editor_property("target_skeleton", Skeleton)
 # '''BP setting end'''
 
 # BP Component Setting Start #
-_bp_ = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(asset_bp)
-_abp_ = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(AnimBP)
+_bp_    = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(asset_bp)
+_abp_   = unreal.EditorAssetLibrary.get_path_name_for_loaded_asset(AnimBP)
 
-_bp_c = get_bp_c_by_name(_bp_) 
+_bp_c  = get_bp_c_by_name(_bp_) 
 _abp_c = get_bp_c_by_name(_abp_)
 
-loaded_abp = unreal.EditorAssetLibrary.load_blueprint_class(_abp_c)
+loaded_abp   = unreal.EditorAssetLibrary.load_blueprint_class(_abp_c)
 bp_mesh_comp = get_bp_mesh_comp(_bp_c)
 
 bp_mesh_comp.set_editor_property('skeletal_mesh',ar_asset_lists[0])
