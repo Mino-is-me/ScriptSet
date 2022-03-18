@@ -1,8 +1,8 @@
 import unreal
 
 
-src_num = '_02' 
-dst_num = '_46'
+# src_num = '_02' 
+# dst_num = '_46'
 
 ar_asset_lists = unreal.EditorUtilityLibrary.get_selected_assets() 
 
