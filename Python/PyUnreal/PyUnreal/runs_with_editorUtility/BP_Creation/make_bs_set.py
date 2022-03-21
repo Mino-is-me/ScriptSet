@@ -171,3 +171,7 @@ set_blendSample_to_bs( bs_idle_groggy,      bs_sample_for_groggy)
 set_blendSample_to_bs( bs_idle_airborne,    bs_sample_for_airborne)
 set_blendSample_to_bs( bs_idle_lockon,      bs_sample_for_lock_on)
 #######################################run end here#######################################
+
+## save execution from here ## 
+unreal.EditorAssetLibrary.save_directory(bs_path, True, True)
+## save execution End here ## 
