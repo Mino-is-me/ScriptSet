@@ -1,4 +1,3 @@
-from pickle import FALSE
 import unreal
 
 ar_asset_lists = unreal.EditorUtilityLibrary.get_selected_assets()

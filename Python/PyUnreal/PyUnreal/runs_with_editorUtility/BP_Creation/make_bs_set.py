@@ -3,6 +3,7 @@
 
 #######################################import modules from here#################################
 import unreal 
+import re
 #######################################import modules end#######################################
 
 
@@ -27,16 +28,18 @@ def get_anim_list (__path: str) -> list :
 
 
 def check_animseq_by_name_in_list (__anim_name: str, __list: list ) -> str :
+    need_to_return :str = ''
     if len(__list) > 0 :
         for each in __list :
-            name = each.rsplit('.', 1)[1]
-            found_name = name.find(__anim_name)
-            if found_name != -1 :
+            result = re.search(__anim_name, each)
+            if result != None :
+                need_to_return = each
                 break 
-        return each
+        return need_to_return
     else :
-        return ''
-#공백 문자열을 리턴하지 못하는 이슈가 있어와요 << 체크 
+        return need_to_return
+#Re Module로 리팩토링함.
+##애니메이션을 못찾으면 끼워넣지 않아요!
 
 
 def set_bs_sample (__animation, __axis_x: float, __axis_y: float) : # returns [BlendSample] unreal native type 
