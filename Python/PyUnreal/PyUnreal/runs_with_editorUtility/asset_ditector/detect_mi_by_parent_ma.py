@@ -19,14 +19,14 @@ for each in selected_list :
 
     if classof == compare_class : 
         if each.parent == _seek_parent_material :
-            need_to_print: str = each.get_name() + ' => parent of this material instance is ' + _seek_parent_material.get_name() + ' => OK '
+            need_to_print: str = each.get_name() + ' => ' + _seek_parent_material.get_name() + ' => OK '
             unreal.log(need_to_print)
 
         else :
-            need_to_print: str = each.get_name() + ' => parent of this material instance is not ' + _seek_parent_material.get_name()
+            need_to_print: str = each.get_name() + ' ≠> ' + _seek_parent_material.get_name()
             unreal.log_warning(need_to_print)
 
     else :
-        need_to_print: str = each.get_name() + ' => this is not MaterialInstanceConstant '
+        need_to_print: str = each.get_name() + ' <≠> Not MaterialInstanceConstant '
         unreal.log_error(need_to_print)
 
