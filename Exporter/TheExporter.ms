@@ -1,4 +1,4 @@
-d/* Eve Toolset By Minomi*/
+/* Eve Toolset By Minomi*/
 
 --import pytho
 
@@ -763,7 +763,7 @@ fn convertPropL =
 
 Try(closeRolloutFloater theFloater) Catch()
 
-rollout 'Exporter' "Exporter 2.0" width:505 height:723
+rollout 'Exporter' "Exporter" width:505 height:723
 (
 	button 'btn_selectFiles' "Select Files" pos:[19,21] width:158 height:90 align:#left
 	button 'eveLogo' "11" pos:[195,21] width:90 height:90 images:#(eveLogoBMP, eveLogoBMP,1, 1,1,1,1,1)

@@ -11,6 +11,10 @@ def skeletal_mesh_lod_builder ( __num_lod : int, __asssets : list ) -> bool :
     return True  
     #return TRUE if this has been run successfully 
 
+def static_mesh_lod_builder ( __num_lod : int, __asssets : list ) -> bool :  
+    for each in __asssets :
+        #unreal.EditorStaticMeshLibrary(each, )
+        pass
 
 skeletal_mesh_lod_builder( _num_lod, selected )
 
