@@ -1,5 +1,22 @@
 /* Eve Toolset By Minomi*/
 
+/* 
+주석(KR written) 22.03.31
+개발 시 유의사항 및 뭐시꺵이 (고나리질)
+	1. persistance global 사용 금지 
+	2. this 사용 금지 
+	3. global 변수 더 늘리지 말아주세요 
+	4. 더이상 해당 스크립트에 모듈(펑션, UI등) 추가 금지 (코드가 더럽게 늘어집니다) -> 최 하단 참고 
+		4-1. 모듈 추가하고 싶으면 컴포넌트 형태(스벨트나 리액트처럼) 폴더째로 뽑아서 'FileIn'메소드 돌리십시오
+		4-2. 이벤트 바인딩 ex ) button pressed 등은 자유롭게 추가 가능 
+	5. Include 사용 금지, Project Dir이 네트워크 드라이브로 되어있어서 가끔 씹힘 >> FileIn 쓰세요 
+	6. https://github.com/MINOMINOMI/ScriptSet << 깃허브 2022 리비전 참조, 클론이나 포크떠서 버전 컨트롤 하세요
+	7. 거진 6년짜리 코드 뜯고 고치고 한거라 타이핑 스타일, 컨벤션등이 중구난방입니다. (그만큼 여러 언어에 영향을 많이 받았습니다 (Rust, Python, TypeScript 등등...)	)
+
+	맥스스크립트가 개발도구가 아닌곳에서는 행복하겠습니다, 수고! 
+	2022.03.21 TA 장민호 드림
+*/
+
 --import pytho
 
 global projectDir = "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\"
@@ -1171,13 +1188,16 @@ theFloater = newRolloutFloater "EVE Tool" 505 960
 
 addRollout 'Exporter' theFloater rolledUp:false
 addRollout 'RootMotionMaker' theFloater rolledUp:false
+addrollout 'awesomeTools' theFloater rolledUp:false
+addRollout 'attrManager' theFloater rolledUp:false 
+addrollout 'cinemaArtists' theFloater rolledUp:false
 addrollout 'rltKeyReducer' theFloater rolledUp:true
 addRollout 'setKeyForSelected' theFloater rolledUp:true
 addRollout 'rBipCopytoSel' theFloater rolledUp:true 
 addRollout 'BVHRetargeter' theFloater rolledUp:true 
 addRollout 'LocoMocapRotator' theFloater rolledUp:true 
-addrollout 'awesomeTools' theFloater rolledUp:false
-addRollout 'attrManager' theFloater rolledUp:false 
-addrollout 'cinemaArtists' theFloater rolledUp:false
+/*
+모듈단위로 개발 후 여기서 붙이세요 
+*/
 --createDialog rltKeyReducer 400 80
 --addRollout 'showMaker' theFloater rolledUp:true 
