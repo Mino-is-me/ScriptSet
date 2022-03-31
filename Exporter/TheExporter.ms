@@ -788,7 +788,7 @@ rollout 'Exporter' "Exporter" width:505 height:723
 	listBox 'mlb_FileNames' "File List" pos:[28,139] width:433 height:16 align:#left
 	button 'btn_FilePath' "Select Export Path" pos:[24,394] width:93 height:34 align:#left
 	editText 'et_FilePath' "" pos:[120,393] width:343 height:35 align:#left
-	dropDownList 'ddl_Species' "Species" pos:[20,461] width:448 height:41 items:#("PC(EVE)", "MOB(NA)", "Weapon(WP)", "Parts(EVE)", "CAM") align:#left selection:Species
+	dropDownList 'ddl_Species' "Species" pos:[20,461] width:448 height:41 items:#("PC(EVE)", "MOB(NA) or General", "Weapon(WP)", "Parts(EVE)", "CAM") align:#left selection:Species
 	dropDownList 'ddl_exportOption' "Export Option" pos:[20,500] width:448 height:41 items:#("Skeletal Mesh", "Animation", "Selected Mesh Only", "All", "Selected", "Seperated") selection:exportOption align:#left
 	button 'btn_export' "Export" pos:[305,20] width:158 height:90 align:#left
 	groupBox 'grp1' "Import / Export" pos:[9,5] width:467 height:118 align:#left

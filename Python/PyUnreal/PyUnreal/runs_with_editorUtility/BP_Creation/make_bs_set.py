@@ -2,8 +2,10 @@
 ## run with python 2.7 in UE4
 
 #######################################import modules from here#################################
+from pyclbr import Class
 import unreal 
 import re
+from typing import List
 #######################################import modules end#######################################
 
 
@@ -22,7 +24,7 @@ def get_selected_asset_dir() -> str :
     return path
 
 
-def get_anim_list (__path: str) -> list :
+def get_anim_list (__path: str) -> List[str] :
     seq_list = unreal.EditorAssetLibrary.list_assets(__path, False, False)
     return seq_list
 
@@ -42,7 +44,7 @@ def check_animseq_by_name_in_list (__anim_name: str, __list: list ) -> str :
 ##애니메이션을 못찾으면 끼워넣지 않아요!
 
 
-def set_bs_sample (__animation, __axis_x: float, __axis_y: float) : # returns [BlendSample] unreal native type 
+def set_bs_sample (__animation, __axis_x: float, __axis_y: float) -> object : # returns [BlendSample] unreal native type 
     bs_sample = unreal.BlendSample()
     vec_sample = unreal.Vector(__axis_x, __axis_y, 0.0) #do not use 3D BlendSampleVector
     bs_sample.set_editor_property('animation', __animation)
@@ -53,11 +55,11 @@ def set_bs_sample (__animation, __axis_x: float, __axis_y: float) : # returns [B
 
 
 
-def set_blendSample_to_bs (__blendspace, __blendsample) : #returns [BlendSpace] unreal loaded asset
+def set_blendSample_to_bs (__blendspace, __blendsample) -> int : #returns [BlendSpace] unreal loaded asset
     __blendspace.set_editor_property('sample_data', __blendsample)
     return 0
 
-def set_blendParameter (__min: float , __max: float) :
+def set_blendParameter (__min: float , __max: float) -> object :
     bs_parameter = unreal.BlendParameter()
     bs_parameter.set_editor_property('display_name', 'none')
     bs_parameter.set_editor_property('grid_num', 4)
@@ -65,7 +67,7 @@ def set_blendParameter (__min: float , __max: float) :
     bs_parameter.set_editor_property('max', __max)
     return bs_parameter
 
-def set_square_blendSpace (__blendspace, __blendparameter) :
+def set_square_blendSpace (__blendspace, __blendparameter) -> None :
     __blendspace.set_editor_property('blend_parameters', [__blendparameter,__blendparameter,__blendparameter])
 #######################################functions end#######################################
 
@@ -108,14 +110,14 @@ class wrapedBlendSpaceSetting:
 #######################################class end#######################################
 
 #######################################run from here#######################################
-wraped = wrapedBlendSpaceSetting()
+wraped :Class   = wrapedBlendSpaceSetting()
 wraped.main_dir = get_selected_asset_dir()
 
-seek_anim_path = wraped.main_dir + wraped.custom_input
-bs_path = wraped.main_dir + wraped.bs_dir
+seek_anim_path  = wraped.main_dir + wraped.custom_input
+bs_path         = wraped.main_dir + wraped.bs_dir
 
-anim_list = get_anim_list(seek_anim_path)
-name_list : list = []
+anim_list       = get_anim_list(seek_anim_path)
+name_list :list = []
 
 
 for each in wraped.seq_names :
