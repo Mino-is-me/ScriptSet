@@ -2,6 +2,8 @@ import gc
 import unreal 
 import sys
 
+__lo_d_level :str
+
 _num_lod : int  = int(__lo_d_level)  # Binded value from Widget UI
 selected : list = unreal.EditorUtilityLibrary.get_selected_assets() #get selected assets using editorUtilityLib
 

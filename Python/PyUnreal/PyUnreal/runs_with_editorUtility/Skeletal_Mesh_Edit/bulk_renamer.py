@@ -1,8 +1,8 @@
 import unreal
 
 
-# src_num = # Binded value from Widget UI
-# dst_num = # Binded value from Widget UI
+src_num :str #Binded value from Widget UI
+dst_num :str # Binded value from Widget UI
 
 ar_asset_lists = unreal.EditorUtilityLibrary.get_selected_assets() 
 

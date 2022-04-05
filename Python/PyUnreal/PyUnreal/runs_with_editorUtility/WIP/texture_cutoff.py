@@ -1,7 +1,7 @@
 import unreal as ue 
 
 
-#new_size    :int    = 0
+new_size    :int
 #input from editor 
 
 asset_lib   :object = ue.EditorAssetLibrary 
