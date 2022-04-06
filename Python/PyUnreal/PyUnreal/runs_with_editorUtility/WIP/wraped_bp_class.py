@@ -1,13 +1,13 @@
+#from typing_extensions import Self
 from typing_extensions import Self
 import unreal
 
 class wrapped_sb_bp :
 
-    dir : str = ""
-    bp_class = ''
-    loaded_bp = ''
-
-    ue_assetlib = unreal.EditorAssetLibrary()
+    dir         :str 
+    bp_class    :object
+    loaded_bp   :object
+    name        :str
 
     def get_selected_asset_dir() -> str :
         selected_asset = unreal.EditorUtilityLibrary.get_selected_assets()[0]
@@ -41,9 +41,3 @@ class wrapped_sb_bp :
         bp_c_obj = unreal.get_default_object(loaded_bp_c)
         loaded_comp = bp_c_obj.get_editor_property(__seek)
         return loaded_comp
-
-
-bp_to_edit = wrapped_sb_bp()
-bp_to_edit.dir = bp_to_edit.get_selected_asset_dir()
-bp_to_edit.loaded_bp = bp_to_edit.get_bp_c_by_name(bp_to_edit.dir)
-
