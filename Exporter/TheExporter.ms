@@ -43,10 +43,8 @@ Global rolloutSetting = ( (getDir #userScripts) + "\\" + "personalSetting.ini" )
 
 Global exportWithMorph = false 
 Global exportWithRootMotion = false
-
 Global hasProp = false 
 Global hasXtraProp = false 
-
 Global leftWeaponAnim = false 
 
 
@@ -947,16 +945,16 @@ rollout 'Exporter' "Exporter" width:505 height:723
 				(
 					if RootMotionMaker.Species.Selection == 1 then 
 					(
-						fileIn "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotionTest.ms"
+						fileIn (projectDir + "RootMotionExtracter\\RootMotionTest.ms")
 					)
 					else if RootMotionMaker.Species.Selection == 2 then 
 					(
-						fileIn "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\RootMotion_MultiLegs.ms"
+						fileIn (projectDir + "RootMotionExtracter\\RootMotion_MultiLegs.ms")
 					)
 				)
 				if Exporter.chk_BaseRemover.checked do 
 				(
-					filein "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\BaseExtracter.ms"
+					filein (projectDir + "RootMotionExtracter\\BaseExtracter.ms")
 				)
 				/*
 				if chk_pelvTri.checked do 
@@ -1027,7 +1025,7 @@ rollout 'Exporter' "Exporter" width:505 height:723
 			)
 			if Exporter.chk_BaseRemover.checked do 
 			(
-				filein "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\RootMotionExtracter\\BaseExtracter.ms"
+				filein (projectDir + "RootMotionExtracter\\BaseExtracter.ms")
 			)
 			/*
 			if chk_pelvTri.checked do 
@@ -1170,17 +1168,17 @@ rollout cinemaArtists "Production"
 	button btn_pressme3 "Rule Move Maker"
 	on btn_pressme1 pressed do 
 	(
-		filein "Z:\\ART_Backup\\Script\\FacialMaker\\Visage.ms"
+		filein (projectDir + "FacialMaker\\Visage.ms")
 	)
 
 	on btn_pressme2 pressed do
 	(
-		filein "Z:\\ART_Backup\\Script\\ShowMaker\\showMaker.ms"
+		filein (projectDir + "ShowMaker\\showMaker.ms")
 	)
 
 	on btn_pressme3 pressed do
 	(
-		fileIn "Z:\\ART_Backup\\Script\\RuleMoveMaker\\ruleMoveMaker.ms"
+		fileIn (projectDir + "RuleMoveMaker\\ruleMoveMaker.ms")
 	)
 )
 
