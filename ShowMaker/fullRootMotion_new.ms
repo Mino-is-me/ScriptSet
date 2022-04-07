@@ -51,8 +51,8 @@ with animate on ( -- floor COM transform
         $'Bip001'.transform = pnt_expose_COM.transform
     )
 )
-
-Biped.collapseAtLayer $Bip001.controller 0
+sliderTime = animationRange.start 
+--Biped.collapseAtLayer $Bip001.controller 0
 
 sliderTime = animationRange.start 
 
