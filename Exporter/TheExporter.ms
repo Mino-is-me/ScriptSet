@@ -781,8 +781,8 @@ Try(closeRolloutFloater theFloater) Catch()
 rollout 'Exporter' "Exporter" width:505 height:723
 (
 	button 'btn_selectFiles' "Select Files" pos:[19,21] width:158 height:90 align:#left
-	button 'eveLogo' "11" pos:[195,21] width:90 height:90 images:#(eveLogoBMP, eveLogoBMP,1, 1,1,1,1,1) tooltip:"pls use JIRA"
-	--button 'eveLogo' "11" pos:[195,21] width:90 height:90 images:#(underConstructionPNG, underConstructionPNG,1, 1,1,1,1,1)
+	--button 'eveLogo' "11" pos:[195,21] width:90 height:90 images:#(eveLogoBMP, eveLogoBMP,1, 1,1,1,1,1) tooltip:"pls use JIRA"
+	button 'eveLogo' "11" pos:[195,21] width:90 height:90 images:#(underConstructionPNG, underConstructionPNG,1, 1,1,1,1,1)
 	listBox 'mlb_FileNames' "File List" pos:[28,139] width:433 height:16 align:#left
 	button 'btn_FilePath' "Select Export Path" pos:[24,394] width:93 height:34 align:#left
 	editText 'et_FilePath' "" pos:[120,393] width:343 height:35 align:#left

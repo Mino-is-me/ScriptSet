@@ -1,4 +1,4 @@
-fileIn  "\\\\10.220.70.12\\eve\\ART_Backup\\Script\\Library\\copyPaste.ms"
+filein (projectDir + "Library\\copyPaste.ms")
 
 
 loadMaxFile  showMaker.edt_caster.text quiet:true

@@ -96,7 +96,7 @@ rollout showMaker "Show Maker" width:200 height:350
         resetMaxFile #noPrompt 
         if not (showMaker.chk_useCustomRootMotion.checked) then (
             loadMaxFile  showMaker.edt_target.text quiet:true
-            filein "Z:\\ART_Backup\\Script\\ShowMaker\\FullRootMotion.ms"
+            filein (projectDir + "ShowMaker\\fullRootMotion.ms")
             saveMaxFile ((showMaker.edt_exportPath.text) + ("\\LinkTarget.max") ) quiet:true
 
             resetMaxFile #noPrompt 
