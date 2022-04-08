@@ -20,8 +20,7 @@ for i = AnimationRange.start to AnimationRange.end do
 sliderTime = AnimationRange.start
 
 
-deleteKeys $Root.children[1].controller #allKeys
-
+deleteKeys $Base.controller #allKeys -- find name 
 numLayersCOM = biped.numLayers $Bip001.controller
 if numLayersCOM != 0 then 
 (
