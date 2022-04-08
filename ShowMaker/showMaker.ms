@@ -41,6 +41,7 @@ rollout showMaker "Show Maker" width:200 height:350
 	button 'btn_launch' "Launch" pos:[100,280] width:83 height:35 align:#left
 	button 'btn_exportPath' "Export Path" pos:[16,220] width:71 height:22 align:#left
 	editText 'edt_exportPath' "" pos:[11,250] width:162 height:17 align:#left
+    button 'btn_open_exportPath' "open" pos:[145,220] width:40 height:22 align:#left
 
     on btn_open_caster pressed do (
         loadMaxFile  showMaker.edt_caster.text quiet:true
@@ -48,7 +49,9 @@ rollout showMaker "Show Maker" width:200 height:350
     on btn_open_target pressed do (
         loadMaxFile showMaker.edt_target.text quiet:true 
     )
-
+    on btn_open_exportPath pressed do (
+        ShellLaunch showMaker.edt_exportPath.text ""
+    )
     on btn_Caster pressed do
     (
         files = fn_getMultipleFiles()

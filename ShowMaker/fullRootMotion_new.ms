@@ -54,6 +54,9 @@ with animate on ( -- floor COM transform
 --Biped.collapseAtLayer $Bip001.controller 0
 
 sliderTime = animationRange.start 
+with animate on (
+    $'Bip001'.transform = pnt_expose_COM.transform
+)--startframe transform setup correction
 
 $Root.pos = [0,showMaker.spn_distance.value,0]
 
