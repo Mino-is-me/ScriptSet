@@ -95,56 +95,10 @@ rollout showMaker "Show Maker" width:200 height:350
 
         resetMaxFile #noPrompt 
         if not (showMaker.chk_useCustomRootMotion.checked) then (
-            loadMaxFile  showMaker.edt_target.text quiet:true
-            filein (projectDir + "ShowMaker\\fullRootMotion.ms")
-            saveMaxFile ((showMaker.edt_exportPath.text) + ("\\LinkTarget.max") ) quiet:true
-
-            resetMaxFile #noPrompt 
-    
-    
-            loadMaxFile showMaker.edt_caster.text quiet:true 
-    
-            thecopypastedir = getdir #autoback -- CHANGE THIS TO ANY FOLDER YOU WANT
-            thecopypastefile = "\pastefile.max" --this is the filename to save as...
-            thecopypastestring = thecopypastedir + thecopypastefile --this is the complete string
-        
-            mergemaxfile (thecopypastedir + thecopypastefile) #select #autoRenameDups quiet:true --this merges ("pastes") and selects objects from file
-    
-            
-            linkRoot = Dummy()
-            $Root001.parent = linkRoot
-            
-            linkRoot.rotation = quat 0 0 1 0
-    
-    
-            if not (isValidNode $SC_LinkTarget) do 
-            (
-                --delete $SC_LinkTarget
-                sc_LinkTarget = dummy()
-                sc_LinkTarget.parent = $Root
-                sc_LinkTarget.transform = (matrix3 [1,0,0] [0,1,-1.19209e-07] [0,1.19209e-07,1] [0,0,0])
-                sc_LinkTarget.name = "SC_LinkTarget"
-            )
-    
-    
-            cnt=0
-            with Animate on 
-            (
-                for i=AnimationRange.start to AnimationRange.end do 
-                (
-                    cnt = cnt+1
-                    SliderTime = i 
-                    $sc_LinkTarget.transform = $Root001.transform 
-                )
-            )
-    
-            delete $Root001
-            delete linkRoot
-    
-            saveMaxFile ( (showMaker.edt_exportPath.text) + ("\\LinkCaster.max") ) quiet:true
+            filein (projectDir + "ShowMaker\\fullRootMotion_new.ms")
         )
         else (     
-            filein "Z:\\ART_Backup\\Script\\ShowMaker\\customRootMotion.ms"
+            filein (projectDir + "ShowMaker\\customRootMotion.ms")
         )
 
     )
